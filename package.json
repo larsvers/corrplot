@@ -19,6 +19,7 @@
     "rollup-plugin-babel": "^4.3.3"
   },
   "dependencies": {
+    "d3-fetch": "^1.1.2",
     "dat.gui": "^0.7.6",
     "three": "^0.113.2"
   }
