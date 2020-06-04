@@ -7,7 +7,7 @@ function getCorrLayout(data, { size = 1 } = {}) {
   for (let row = 0; row < data.length; row++) {
     for (let col = 0; col < data.length; col++) {
       // Shape the grid.
-      if (row > col) continue;
+      if (row >= col) continue;
       // Element info.
       const point = {
         value: data[row][data.columns[col]],

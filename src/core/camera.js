@@ -1,9 +1,17 @@
-import { PerspectiveCamera } from 'three/build/three.module';
+import { OrthographicCamera } from 'three/build/three.module';
+import renderer from './renderer';
 
-const fov = 75;
-const aspect = 2;
 const near = 1;
 const far = 1000;
-const camera = new PerspectiveCamera(fov, aspect, near, far);
+
+const canvas = renderer.domElement;
+const camera = new OrthographicCamera(
+  -canvas.clientWidth / 2,
+  canvas.clientWidth / 2,
+  canvas.clientHeight / 2,
+  -canvas.clientHeight / 2,
+  near,
+  far
+);
 
 export default camera;

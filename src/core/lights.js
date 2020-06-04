@@ -13,7 +13,7 @@ let ambientLight;
 }
 {
   const color = '#fff';
-  const intensity = 0.7;
+  const intensity = 0.3;
   pointLight = new PointLight(color, intensity);
 }
 

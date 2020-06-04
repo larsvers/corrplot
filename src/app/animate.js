@@ -9,7 +9,10 @@ function animate(time) {
 
   if (setRendererSize(renderer)) {
     const canvas = renderer.domElement;
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.left = -canvas.clientWidth / 2;
+    camera.right = canvas.clientWidth / 2;
+    camera.top = canvas.clientHeight / 2;
+    camera.bottom = -canvas.clientHeight / 2;
     camera.updateProjectionMatrix();
   }
 

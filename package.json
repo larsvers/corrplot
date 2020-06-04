@@ -19,8 +19,11 @@
     "rollup-plugin-babel": "^4.3.3"
   },
   "dependencies": {
+    "d3-array": "^1.2.4",
     "d3-dsv": "^1.2.0",
     "d3-fetch": "^1.1.2",
+    "d3-scale": "^3.2.1",
+    "d3-scale-chromatic": "^1.5.0",
     "dat.gui": "^0.7.6",
     "lodash.clonedeep": "^4.5.0",
     "three": "^0.113.2"
