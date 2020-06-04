@@ -15,3 +15,11 @@ Scales :)
 1. x scale
 2. y scale
 3. z scale
+
+## Add setting for grid shape
+
+Setting `gridshape` would have options related to conditions like:
+
+- 'full': no condtion
+- 'half': `if (row <= col) continue`
+- 'halfAuto': `if (row < col) continue`

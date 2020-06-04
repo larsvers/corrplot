@@ -1,35 +1,41 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
-import {
-  IcosahedronBufferGeometry,
-  Mesh,
-  MeshStandardMaterial,
-} from 'three/build/three.module';
-
 import { csv } from 'd3-fetch/src/index';
+import { autoType } from 'd3-dsv/src/index';
+import { AxesHelper } from 'three/build/three.module';
 import scene from '../core/scene';
 import camera from '../core/camera';
 import { ambientLight, pointLight } from '../core/lights';
 import controls from '../core/controls';
+import prepData from './data';
 
-function init() {
-  // Just load the data and call the main func.
-  csv('../../data/corr.csv').then(ready);
-}
+import getGrid from './makeGrid';
+import getCorrLayout from './layoutCorr';
+import getDiscs from './makeDiscs';
 
 function ready(data) {
   controls.rotateSpeed = 4.0;
-  camera.position.set(0, 0, 10);
+  camera.position.set(0, 0, 100);
   controls.update();
 
-  pointLight.position.set(-5, 5, 5);
+  pointLight.position.set(-50, 50, 50);
   scene.add(ambientLight, pointLight);
 
-  const geo = new IcosahedronBufferGeometry(1, 1);
-  const mat = new MeshStandardMaterial({ color: '#777', flatShading: true });
-  const mesh = new Mesh(geo, mat);
+  const ah1 = new AxesHelper(10);
+  scene.add(ah1);
 
-  scene.add(mesh);
+  const corrData = prepData(data);
+  const layout = getCorrLayout(corrData, { size: 10 });
+  const grid = getGrid(layout, { size: 10, colour: '#777' });
+  const discs = getDiscs(layout, { size: 10 });
+
+  scene.add(grid);
+  scene.add(discs);
+}
+
+function init() {
+  // Just load the data and call the main func.
+  csv('../../data/corr.csv', autoType).then(ready);
 }
 
 export default init;
