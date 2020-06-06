@@ -12,18 +12,16 @@ import prepData from './data';
 import getGrid from './makeGrid';
 import getCorrLayout from './layoutCorr';
 import getDiscs from './makeDiscs';
+import getLabels from './makeLabels';
 
 function ready(data) {
   controls.rotateSpeed = 4.0;
   camera.position.set(0, 0, 100);
   controls.update();
 
-  // pointLight.position.set(-50, 50, 50);
-  // scene.add(ambientLight, pointLight);
-  scene.add(ambientLight);
-
   camera.add(pointLight);
   scene.add(camera);
+  scene.add(ambientLight);
 
   const ah1 = new AxesHelper(20);
   scene.add(ah1);
@@ -34,25 +32,20 @@ function ready(data) {
   const layout = getCorrLayout(corrData, { size });
   const grid = getGrid(layout, { size, colour: '#999' });
   const discs = getDiscs(layout, { size });
-
-  // Labels.
-  // Make texture.
-  const labelParams = {
-    size: 100,
-    type: 'Helvetica',
-    colour: '#ccc',
-    scale: 0.005,
-  };
-
-  // const myLabel = makeLabelCanvas('Jetzt aber!', labelParams);
-  // scene.add(myLabel);
+  const labels = getLabels(layout, { size });
 
   // Move plot to center.
   grid.position.set((-size * data.length) / 2.5, (-size * data.length) / 2, 0);
   discs.position.set((-size * data.length) / 2.5, (-size * data.length) / 2, 0);
+  labels.position.set(
+    (-size * data.length) / 2,
+    (-size * data.length) / 2 + size,
+    0
+  );
 
   scene.add(grid);
   scene.add(discs);
+  scene.add(labels);
 }
 
 function init() {
