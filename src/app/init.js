@@ -25,7 +25,7 @@ function ready(data) {
   camera.add(pointLight);
   scene.add(camera);
 
-  const ah1 = new AxesHelper(10);
+  const ah1 = new AxesHelper(20);
   scene.add(ah1);
 
   // Build plot.
@@ -34,6 +34,18 @@ function ready(data) {
   const layout = getCorrLayout(corrData, { size });
   const grid = getGrid(layout, { size, colour: '#999' });
   const discs = getDiscs(layout, { size });
+
+  // Labels.
+  // Make texture.
+  const labelParams = {
+    size: 100,
+    type: 'Helvetica',
+    colour: '#ccc',
+    scale: 0.005,
+  };
+
+  // const myLabel = makeLabelCanvas('Jetzt aber!', labelParams);
+  // scene.add(myLabel);
 
   // Move plot to center.
   grid.position.set((-size * data.length) / 2.5, (-size * data.length) / 2, 0);
@@ -46,6 +58,7 @@ function ready(data) {
 function init() {
   // Just load the data and call the main func.
   csv('../../data/corr.csv', autoType).then(ready);
+  // csv('../../data/corr-s.csv', autoType).then(ready);
 }
 
 export default init;
