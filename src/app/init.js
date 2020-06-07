@@ -2,7 +2,6 @@
 /* eslint-disable no-param-reassign */
 import { csv } from 'd3-fetch/src/index';
 import { autoType } from 'd3-dsv/src/index';
-import { AxesHelper } from 'three/build/three.module';
 import scene from '../core/scene';
 import camera from '../core/camera';
 import { ambientLight, pointLight } from '../core/lights';
@@ -15,37 +14,36 @@ import getDiscs from './makeDiscs';
 import getLabels from './makeLabels';
 
 function ready(data) {
+  // Controls.
   controls.rotateSpeed = 4.0;
   camera.position.set(0, 0, 100);
   controls.update();
 
+  // Lights.
   camera.add(pointLight);
   scene.add(camera);
   scene.add(ambientLight);
 
-  const ah1 = new AxesHelper(20);
-  scene.add(ah1);
-
   // Build plot.
   const size = 10;
   const corrData = prepData(data);
-  const layout = getCorrLayout(corrData, { size });
+  const layout = getCorrLayout(corrData, { size, type: 'full' });
   const grid = getGrid(layout, { size, colour: '#999' });
   const discs = getDiscs(layout, { size });
-  const labels = getLabels(layout, { size });
+  const { colLabels, rowLabels } = getLabels(layout, { size });
 
-  // Move plot to center.
-  grid.position.set((-size * data.length) / 2.5, (-size * data.length) / 2, 0);
-  discs.position.set((-size * data.length) / 2.5, (-size * data.length) / 2, 0);
-  labels.position.set(
-    (-size * data.length) / 2,
-    (-size * data.length) / 2 + size,
-    0
-  );
+  // Positioning.
+  const dim = size * data.length;
+  grid.position.set(-dim / 2.5, -dim / 2, 0);
+  discs.position.set(-dim / 2.5, -dim / 2, 0);
+  colLabels.position.set(-dim / 2.5, dim / 2, 0);
+  rowLabels.position.set(-dim / 2, -dim / 2, 0);
 
+  // Build scene.
   scene.add(grid);
   scene.add(discs);
-  scene.add(labels);
+  scene.add(colLabels);
+  scene.add(rowLabels);
 }
 
 function init() {

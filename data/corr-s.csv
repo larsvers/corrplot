@@ -1,4 +1,4 @@
-rows,fixed_acidity,volatile_acidity,citric_acid
-fixed_acidity,1,-0.256130895,0.671703435
-volatile_acidity,-0.256130895,1,-0.552495685
-citric_acid,0.671703435,-0.552495685,1
+rows,fixed acidity,volatile acidity,citric acid
+fixed acidity,1,-0.256130895,0.671703435
+volatile acidity,-0.256130895,1,-0.552495685
+citric acid,0.671703435,-0.552495685,1

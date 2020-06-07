@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 import {
   CanvasTexture,
@@ -8,8 +9,13 @@ import {
   Group,
 } from 'three/build/three.module';
 
-import { max } from 'd3-array/src/index';
-
+/**
+ * Produces a single label sprite. Note this
+ * will always face the camera.
+ * @param { String } message Text to show
+ * @param { Object } options Configurations
+ * @returns { Sprite Mesh } Sprite mesh.
+ */
 function getLabel(
   message,
   {
@@ -88,65 +94,66 @@ function getLabel(
   label.scale.x = canvas.width * scale;
   label.scale.y = canvas.height * scale;
 
-  // Add the texture's width,
-  // allows us to align it with other labels.
-  label.userData.width = width;
-
   return label;
 }
 
-function getLabels(data, { size = 1, align = 'right' } = {}) {
-  const rowLabels = [];
-  const colLabels = [];
+function getLabels(data, { size = 1 } = {}) {
+  const rowLabelData = [];
+  const colLabelData = [];
+
+  // Loop through the data.
+  // We'll make row and column labels here.
   for (let i = 0; i < data.length; i++) {
     const d = data[i];
 
     // Get row label positions.
-    if (!rowLabels.map(el => el.row).includes(d.row))
-      rowLabels.push({
+    if (!rowLabelData.map(el => el.row).includes(d.row))
+      rowLabelData.push({
         row: d.row,
-        index: d.index[0],
-        position: d.position[0],
-      });
-
-    // Get col label positions.
-    if (!colLabels.map(el => el.col).includes(d.col))
-      colLabels.push({
-        col: d.col,
         index: d.index[1],
         position: d.position[1],
       });
+
+    // Get col label positions.
+    if (!colLabelData.map(el => el.col).includes(d.col))
+      colLabelData.push({
+        col: d.col,
+        index: d.index[0],
+        position: d.position[0],
+      });
   }
 
-  // debugger;
+  // Set the sprite parameters here.
   const labelParams = {
-    size: 40,
+    size: 400,
     type: 'Arial',
     colour: '#555',
-    scale: 0.1,
+    scale: 0.01,
     background: false,
   };
 
-  const labels = new Group();
+  // Make a group of row labels.
+  const rowLabels = new Group();
 
-  rowLabels.forEach(d => {
+  rowLabelData.forEach(d => {
     const rowLabel = getLabel(d.row, labelParams);
-    rowLabel.userData.yRow = d.position;
-    // rowLabel.userData.indexRow = d.index;
-    labels.add(rowLabel);
-    // labelWidths.push(rowLabel.userData.width);
+    rowLabel.position.set(0, d.position, 0);
+    rowLabel.center.set(1, 0.5);
+    rowLabels.add(rowLabel);
   });
 
-  // const maxWidth = max(labelWidths);
+  // Make a group of column labels.
+  const colLabels = new Group();
 
-  labels.children.forEach(label => {
-    // const slack = ((maxWidth - label.userData.width) / 2) * labelParams.scale;
-    // const hPosition = align === 'right' ? slack : align === 'left' ? -slack : 0;
-    label.position.set(0, label.userData.yRow, 0);
-    label.center.set(1, 0.5);
+  colLabelData.forEach(d => {
+    const colLabel = getLabel(d.col, labelParams);
+    colLabel.position.set(d.position, 0, 0);
+    colLabel.material.rotation = Math.PI / 2;
+    colLabel.center.set(0, 0.5);
+    colLabels.add(colLabel);
   });
 
-  return labels;
+  return { colLabels, rowLabels };
 }
 
 export default getLabels;
