@@ -2,12 +2,15 @@
 /* eslint-disable no-param-reassign */
 import { csv } from 'd3-fetch/src/index';
 import { autoType } from 'd3-dsv/src/index';
+
+import animate from './animate';
 import scene from '../core/scene';
 import camera from '../core/camera';
-import { ambientLight, pointLight } from '../core/lights';
+import { ambientLight, pointLight, pointLightFocus } from '../core/lights';
 import controls from '../core/controls';
 import prepData from './data';
 
+import { bulb } from './helpers';
 import getGrid from './makeGrid';
 import getCorrLayout from './layoutCorr';
 import getDiscs from './makeDiscs';
@@ -27,7 +30,7 @@ function ready(data) {
   // Build plot.
   const size = 10;
   const corrData = prepData(data);
-  const layout = getCorrLayout(corrData, { size, type: 'full' });
+  const layout = getCorrLayout(corrData, { size, type: 'upper' });
   const grid = getGrid(layout, { size, colour: '#999' });
   const discs = getDiscs(layout, { size });
   const { colLabels, rowLabels } = getLabels(layout, { size });
@@ -44,6 +47,13 @@ function ready(data) {
   scene.add(discs);
   scene.add(colLabels);
   scene.add(rowLabels);
+
+  // Add helpers.
+  scene.add(bulb);
+  scene.add(pointLightFocus);
+
+  // Kick off animation.
+  animate();
 }
 
 function init() {
