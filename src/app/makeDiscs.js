@@ -30,8 +30,8 @@ function getDiscs(data, { size = 1 } = {}) {
     // Scaled values.
     const width = widthScale(Math.abs(d.value));
     const height = heightScale(Math.abs(d.value));
-    // const col = colourScale(d.value);
-    const col = '#ccc';
+    const col = colourScale(d.value);
+    // const col = '#ccc';
 
     // Make discs.
     const geo = new CylinderGeometry(width, width, height, 20, 10, false);

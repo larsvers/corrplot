@@ -18,7 +18,8 @@ canvas {
   left: 0;
 }
 
-button {
+button,
+select {
   margin: 0.5rem;
   font-family: Avenir;
   font-size: 10px;

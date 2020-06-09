@@ -9,12 +9,12 @@ let ambientLight;
 // Define lights.
 {
   const color = '#fff';
-  const intensity = 0.5;
+  const intensity = 0.8;
   ambientLight = new AmbientLight(color, intensity);
 }
 {
   const color = '#fff';
-  const intensity = 0.1;
+  const intensity = 0.5;
   pointLight = new PointLight(color, intensity);
 }
 {

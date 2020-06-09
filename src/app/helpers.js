@@ -2,6 +2,7 @@ import {
   SphereGeometry,
   MeshBasicMaterial,
   Mesh,
+  PlaneGeometry,
 } from 'three/build/three.module';
 
 // Highlighting light bulb.

@@ -127,7 +127,7 @@ function getLabels(data, { size = 1 } = {}) {
   const labelParams = {
     size: 400,
     type: 'Arial',
-    colour: '#f7f7f7',
+    colour: '#333',
     scale: 0.01,
     background: false,
   };

@@ -5,8 +5,6 @@ import camera from '../core/camera';
 import controls from '../core/controls';
 
 import params from './datGui';
-import { bulb } from './helpers';
-import { pointLightFocus } from '../core/lights';
 
 function animate(time) {
   requestAnimationFrame(animate);
@@ -20,13 +18,6 @@ function animate(time) {
     camera.bottom = -canvas.clientHeight / 2;
     camera.updateProjectionMatrix();
   }
-
-  // Update elements.
-  bulb.position.set(params.x, params.y, params.z);
-  pointLightFocus.position.set(params.x, params.y, params.z);
-  pointLightFocus.intensity = params.intensity;
-  pointLightFocus.distance = params.distance;
-  pointLightFocus.decay = params.decay;
 
   // Update controls and render.
   controls.update();
