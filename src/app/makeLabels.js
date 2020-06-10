@@ -139,6 +139,7 @@ function getLabels(data, { size = 1 } = {}) {
     const rowLabel = getLabel(d.row, labelParams);
     rowLabel.position.set(0, d.position, 0);
     rowLabel.center.set(1, 0.5);
+    rowLabel.userData = d;
     rowLabels.add(rowLabel);
   });
 
@@ -150,6 +151,7 @@ function getLabels(data, { size = 1 } = {}) {
     colLabel.position.set(d.position, 0, 0);
     colLabel.material.rotation = Math.PI / 2;
     colLabel.center.set(0, 0.5);
+    colLabel.userData = d;
     colLabels.add(colLabel);
   });
 

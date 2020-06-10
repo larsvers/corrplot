@@ -25,16 +25,23 @@ function highlightCells(layout, grid) {
  * @param { Function } filterFunc The function to filter the meshes from the group
  * @param { Number } staggerTime Stagger duration
  */
-function fadeOutMeshes(group, filterFunc, staggerTime = 0.1) {
+function fadeOutMeshes(group, filterFunc, staggerTime = 0.1, scaling = true) {
   const meshes = group.children.filter(filterFunc);
   const materials = meshes.map(d => d.material);
   const scales = meshes.map(d => d.scale);
 
-  gsap
-    .timeline()
-    .to(scales, { y: 0.1, stagger: staggerTime }, 0)
-    .to(materials, { opacity: 0, stagger: staggerTime }, 0)
-    .eventCallback('onComplete', removeMeshes, [group, meshes]);
+  if (scaling) {
+    gsap
+      .timeline()
+      .to(scales, { y: 0.1, stagger: staggerTime }, 0)
+      .to(materials, { opacity: 0, stagger: staggerTime }, 0)
+      .eventCallback('onComplete', removeMeshes, [group, meshes]);
+  } else {
+    gsap
+      .timeline()
+      .to(materials, { opacity: 0, stagger: staggerTime }, 0)
+      .eventCallback('onComplete', removeMeshes, [group, meshes]);
+  }
 }
 
 export { highlightCells, fadeOutMeshes };

@@ -123,4 +123,5 @@ function highlight(
     : highlightSquares(data, grid, row, col);
 }
 
+export { lowlight };
 export default highlight;
