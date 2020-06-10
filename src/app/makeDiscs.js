@@ -31,16 +31,18 @@ function getDiscs(data, { size = 1 } = {}) {
     const width = widthScale(Math.abs(d.value));
     const height = heightScale(Math.abs(d.value));
     const col = colourScale(d.value);
-    // const col = '#ccc';
 
     // Make discs.
     const geo = new CylinderGeometry(width, width, height, 20, 10, false);
     const mat = new MeshLambertMaterial({
       color: col,
-      transparent: false,
-      // emissive: col,
+      transparent: true,
     });
     const mesh = new Mesh(geo, mat);
+
+    // Add data and name.
+    mesh.userData = d;
+    mesh.name = `${d.row} | ${d.col}`;
 
     // Position discs.
     mesh.rotateX(Math.PI / 2);

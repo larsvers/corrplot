@@ -13,14 +13,18 @@ canvas {
 }
 
 #controls {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 0;
   left: 0;
+  width: 10rem;
 }
 
 button,
 select {
   margin: 0.5rem;
+  margin-bottom: 0.2rem;
   font-family: Avenir;
   font-size: 10px;
 }

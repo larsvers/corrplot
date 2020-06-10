@@ -16,7 +16,7 @@ import getDiscs from './makeDiscs';
 import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
 
-import { highlightCells } from '../interact/handler';
+import { highlightCells, autoCorrelation } from '../interact/handler';
 
 function ready(data) {
   // Controls.
@@ -69,7 +69,7 @@ function ready(data) {
 
   buildDropdown(cellSelection);
 
-  // Listener.
+  // Listeners.
   document
     .querySelector('#highlight-select')
     .addEventListener('change', function() {
@@ -77,11 +77,11 @@ function ready(data) {
       highlightCells.call(this, layout, grid);
     });
 
-  // TODO: Add a handler to remove/show parts of the grid.
-  // To pull this off, just give all these meshes names
-  // and hide/show them based on the layout you can run.
-  // Not sure about the grid lines, but the rest should
-  // be straight forward.
+  document
+    .querySelector('#remove-auto-corr')
+    .addEventListener('click', function() {
+      autoCorrelation.call(this, discs);
+    });
 }
 
 function init() {
