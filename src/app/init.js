@@ -54,8 +54,20 @@ function ready(data) {
   animate();
 
   // Build UI.
+  // All possible combinations.
   const cells = layout.map(d => ({ row: d.row, col: d.col }));
-  buildDropdown(cells);
+  // Just a selection...
+  const cellSelection = cells.filter(d => {
+    return (
+      (d.row === 'citric acid' && d.col === 'volatile acidity') ||
+      (d.row === 'ph' && d.col === 'citric acid') ||
+      (d.row === 'alcohol' && d.col === 'density') ||
+      (d.row === 'total sulfur dioxide' && d.col === 'free sulfur dioxide') ||
+      (d.row === 'quality' && d.col === 'quality')
+    );
+  });
+
+  buildDropdown(cellSelection);
 
   // Listener.
   document
