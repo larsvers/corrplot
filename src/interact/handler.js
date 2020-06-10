@@ -20,19 +20,21 @@ function highlightCells(layout, grid) {
 }
 
 /**
- * Removes the autocorrelations.
- * @param { Object3D } discs The grid of cylinders.
+ * Fades out and removes meshes.
+ * @param { Object3D } group The group of objects (scene, group, ...).
+ * @param { Function } filterFunc The function to filter the meshes from the group
+ * @param { Number } staggerTime Stagger duration
  */
-function autoCorrelation(discs) {
-  const autoCorrs = discs.children.filter(d => d.userData.value === 1);
-  const materials = autoCorrs.map(d => d.material);
-  const scales = autoCorrs.map(d => d.scale);
+function fadeOutMeshes(group, filterFunc, staggerTime = 0.1) {
+  const meshes = group.children.filter(filterFunc);
+  const materials = meshes.map(d => d.material);
+  const scales = meshes.map(d => d.scale);
 
   gsap
     .timeline()
-    .to(scales, { y: 0.1, stagger: 0.1 }, 0)
-    .to(materials, { opacity: 0, stagger: 0.1 }, 0)
-    .eventCallback('onComplete', removeMeshes, [discs, autoCorrs]);
+    .to(scales, { y: 0.1, stagger: staggerTime }, 0)
+    .to(materials, { opacity: 0, stagger: staggerTime }, 0)
+    .eventCallback('onComplete', removeMeshes, [group, meshes]);
 }
 
-export { highlightCells, autoCorrelation };
+export { highlightCells, fadeOutMeshes };

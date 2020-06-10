@@ -16,7 +16,7 @@ import getDiscs from './makeDiscs';
 import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
 
-import { highlightCells, autoCorrelation } from '../interact/handler';
+import { highlightCells, fadeOutMeshes } from '../interact/handler';
 
 function ready(data) {
   // Controls.
@@ -80,7 +80,17 @@ function ready(data) {
   document
     .querySelector('#remove-auto-corr')
     .addEventListener('click', function() {
-      autoCorrelation.call(this, discs);
+      fadeOutMeshes(discs, d => d.userData.value === 1);
+    });
+
+  document
+    .querySelector('#remove-lower-half')
+    .addEventListener('click', function() {
+      fadeOutMeshes(
+        discs,
+        d => d.userData.index[1] <= d.userData.index[0],
+        0.01
+      );
     });
 }
 
