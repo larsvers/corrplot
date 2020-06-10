@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable import/no-mutable-exports */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 import { csv } from 'd3-fetch/src/index';
@@ -15,9 +17,14 @@ import getCorrLayout from './layoutCorr';
 import getDiscs from './makeDiscs';
 import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
+import addListener from '../interact/listener';
 
-import { highlightCells, fadeOutMeshes } from '../interact/handler';
-import { lowlight } from '../interact/highlight';
+// Variables the init module exports
+let layout;
+let grid;
+let discs;
+let colLabels;
+let rowLabels;
 
 function ready(data) {
   // Controls.
@@ -33,10 +40,12 @@ function ready(data) {
   // Build plot.
   const size = 10;
   const corrData = prepData(data);
-  const layout = getCorrLayout(corrData, { size, type: 'full' });
-  const grid = getGrid(layout, { size, colour: '#999' });
-  const discs = getDiscs(layout, { size });
-  const { colLabels, rowLabels } = getLabels(layout, { size });
+  layout = getCorrLayout(corrData, { size, type: 'full' });
+  grid = getGrid(layout, { size, colour: '#999' });
+  discs = getDiscs(layout, { size });
+  const labels = getLabels(layout, { size });
+  rowLabels = labels.rowLabels;
+  colLabels = labels.colLabels;
 
   // Positioning.
   const dim = size * data.length;
@@ -55,80 +64,10 @@ function ready(data) {
   animate();
 
   // Build UI.
-  // All possible combinations.
-  const cells = layout.map(d => ({ row: d.row, col: d.col }));
-  // Just a selection...
-  const cellSelection = cells.filter(d => {
-    return (
-      (d.row === 'citric acid' && d.col === 'volatile acidity') ||
-      (d.row === 'pH' && d.col === 'citric acid') ||
-      (d.row === 'alcohol' && d.col === 'density') ||
-      (d.row === 'total sulfur dioxide' && d.col === 'free sulfur dioxide') ||
-      (d.row === 'quality' && d.col === 'alcohol')
-    );
-  });
+  buildDropdown(layout);
 
-  buildDropdown(cellSelection);
-
-  // Listeners.
-  document
-    .querySelector('#highlight-select')
-    .addEventListener('change', function() {
-      // Use `.call` to pass through `this`.
-      highlightCells.call(this, layout, grid);
-    });
-
-  document
-    .querySelector('#reset-grid-colour')
-    .addEventListener('click', function() {
-      lowlight(
-        grid.children.filter(d => d.type === 'Mesh').map(d => d.material)
-      );
-    });
-
-  document
-    .querySelector('#remove-auto-corr')
-    .addEventListener('click', function() {
-      fadeOutMeshes(discs, d => d.userData.value === 1);
-    });
-
-  document
-    .querySelector('#remove-lower-discs')
-    .addEventListener('click', function() {
-      fadeOutMeshes(
-        discs,
-        d => d.userData.index[1] <= d.userData.index[0],
-        0.01
-      );
-    });
-
-  document
-    .querySelector('#remove-lower-grid')
-    .addEventListener('click', function() {
-      // Remove grid parts.
-      fadeOutMeshes(
-        grid,
-        d => d.userData.index[1] <= d.userData.index[0],
-        0.01,
-        false
-      );
-
-      // Remove label.
-      fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
-    });
-
-  document
-    .querySelector('#remove-all-but-quality')
-    .addEventListener('click', function() {
-      // Fade out the discs.
-      fadeOutMeshes(discs, d => d.userData.row !== 'quality', 0.01);
-
-      // Fade out the grid.
-      fadeOutMeshes(grid, d => d.userData.row !== 'quality', 0.01, false);
-
-      // Fade out the labels.
-      fadeOutMeshes(rowLabels, d => d.userData.row !== 'quality', 0.1);
-    });
+  // Add listeners.
+  addListener();
 }
 
 function init() {
@@ -136,5 +75,5 @@ function init() {
   csv('../../data/corr.csv', autoType).then(ready);
   // csv('../../data/corr-s.csv', autoType).then(ready);
 }
-
 export default init;
+export { grid, discs, colLabels, rowLabels };
