@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/no-mutable-exports */
 /* eslint-disable no-plusplus */
@@ -8,10 +9,10 @@ import { autoType } from 'd3-dsv/src/index';
 import animate from './animate';
 import scene from '../core/scene';
 import camera from '../core/camera';
-import { ambientLight, pointLight } from '../core/lights';
 import controls from '../core/controls';
-import prepData from './data';
+import { ambientLight, pointLight } from '../core/lights';
 
+import prepData from './data';
 import getGrid from './makeGrid';
 import getCorrLayout from './layoutCorr';
 import getDiscs from './makeDiscs';
@@ -76,4 +77,4 @@ function init() {
   // csv('../../data/corr-s.csv', autoType).then(ready);
 }
 export default init;
-export { grid, discs, colLabels, rowLabels };
+export { layout, grid, discs, colLabels, rowLabels };
