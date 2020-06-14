@@ -4,10 +4,9 @@ import camera from '../core/camera';
 import controls from '../core/controls';
 import { highlightCells, fadeOutMeshes } from './handler';
 import { lowlight } from './highlight';
-import { layout, grid, discs, colLabels, rowLabels } from '../app/init';
 
 // Actions.
-function highlightSelect() {
+function highlightSelect(layout, grid) {
   document
     .querySelector('#highlight-select')
     .addEventListener('change', function() {
@@ -16,7 +15,7 @@ function highlightSelect() {
     });
 }
 
-function resetGridColour() {
+function resetGridColour(grid) {
   document
     .querySelector('#reset-grid-colour')
     .addEventListener('click', function() {
@@ -26,7 +25,7 @@ function resetGridColour() {
     });
 }
 
-function removeAutoCorrelation() {
+function removeAutoCorrelation(discs) {
   document
     .querySelector('#remove-auto-corr')
     .addEventListener('click', function() {
@@ -34,7 +33,7 @@ function removeAutoCorrelation() {
     });
 }
 
-function removeLowerDiscs() {
+function removeLowerDiscs(discs) {
   document
     .querySelector('#remove-lower-discs')
     .addEventListener('click', function() {
@@ -46,7 +45,7 @@ function removeLowerDiscs() {
     });
 }
 
-function removeLowerGrid() {
+function removeLowerGrid(grid, colLabels) {
   document
     .querySelector('#remove-lower-grid')
     .addEventListener('click', function() {
@@ -63,7 +62,7 @@ function removeLowerGrid() {
     });
 }
 
-function removeAllButQuality() {
+function removeAllButQuality(discs, grid, rowLabels) {
   document
     .querySelector('#remove-all-but-quality')
     .addEventListener('click', function() {
@@ -105,13 +104,13 @@ function focusOnQuality() {
 }
 
 // Main attaching function.
-function addListener() {
-  highlightSelect();
-  resetGridColour();
-  removeAutoCorrelation();
-  removeLowerDiscs();
-  removeLowerGrid();
-  removeAllButQuality();
+function addListener(layout, grid, discs, colLabels, rowLabels) {
+  highlightSelect(layout, grid);
+  resetGridColour(grid);
+  removeAutoCorrelation(discs);
+  removeLowerDiscs(discs);
+  removeLowerGrid(grid, colLabels);
+  removeAllButQuality(discs, grid, rowLabels);
   focusOnQuality();
 }
 

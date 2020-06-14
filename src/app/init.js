@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable import/no-mutable-exports */
 /* eslint-disable no-plusplus */
@@ -68,7 +67,7 @@ function ready(data) {
   buildDropdown(layout);
 
   // Add listeners.
-  addListener();
+  addListener(layout, grid, discs, colLabels, rowLabels);
 }
 
 function init() {
@@ -77,4 +76,3 @@ function init() {
   // csv('../../data/corr-s.csv', autoType).then(ready);
 }
 export default init;
-export { layout, grid, discs, colLabels, rowLabels };
