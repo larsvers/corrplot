@@ -1,10 +1,16 @@
 /* eslint-disable import/no-mutable-exports */
-import { AmbientLight, PointLight } from 'three/build/three.module';
+import {
+  AmbientLight,
+  PointLight,
+  SpotLight,
+  DirectionalLight,
+} from 'three/build/three.module';
 
 // Declare lights.
-let pointLight;
-let pointLightFocus;
 let ambientLight;
+let pointLight;
+let spotLight;
+let directionalLight;
 
 // Define lights.
 {
@@ -14,15 +20,21 @@ let ambientLight;
 }
 {
   const color = '#fff';
-  const intensity = 0.5;
+  const intensity = 0.3;
   pointLight = new PointLight(color, intensity);
 }
 {
   const color = 'yellow';
   const intensity = 2;
-  const decay = 1;
-  pointLightFocus = new PointLight(color, intensity);
+  spotLight = new SpotLight(color, intensity);
+  spotLight.castShadow = true;
+}
+{
+  const color = '#fff';
+  const intensity = 1;
+  directionalLight = new DirectionalLight(color, intensity);
+  directionalLight.castShadow = true;
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { ambientLight, pointLight, pointLightFocus };
+export { ambientLight, pointLight, spotLight, directionalLight };

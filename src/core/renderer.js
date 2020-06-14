@@ -4,5 +4,6 @@ import state from './state';
 const canvas = document.querySelector('canvas');
 const renderer = new WebGLRenderer({ canvas, antialias: true });
 renderer.setClearColor(state.colours.background);
+renderer.shadowMap.enabled = true;
 
 export default renderer;

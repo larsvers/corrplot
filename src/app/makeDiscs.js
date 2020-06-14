@@ -1,8 +1,10 @@
 import {
   CylinderGeometry,
   MeshLambertMaterial,
+  MeshPhongMaterial,
   Mesh,
   Group,
+  ConeGeometry,
 } from 'three/build/three.module';
 
 import { scaleLinear, scaleSequential } from 'd3-scale/src/index';
@@ -34,7 +36,8 @@ function getDiscs(data, { size = 1 } = {}) {
 
     // Make discs.
     const geo = new CylinderGeometry(width, width, height, 20, 10, false);
-    const mat = new MeshLambertMaterial({
+    // const geo = new ConeGeometry(width, height);
+    const mat = new MeshPhongMaterial({
       color: col,
       transparent: true,
     });
@@ -46,11 +49,14 @@ function getDiscs(data, { size = 1 } = {}) {
 
     // Position discs.
     mesh.rotateX(Math.PI / 2);
+    // mesh.rotateX(d.value > 0 ? Math.PI / 2 : -Math.PI / 2);
     mesh.position.set(
       d.position[0],
       d.position[1],
       d.value > 0 ? height / 2 + corr : -height / 2 - corr
     );
+
+    mesh.castShadow = true;
 
     grid.add(mesh);
   });
