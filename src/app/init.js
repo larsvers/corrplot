@@ -19,12 +19,9 @@ import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
 import addListener from '../interact/listener';
 
+import { ah } from './utils';
+
 // Variables the init module exports
-let layout;
-let grid;
-let discs;
-let colLabels;
-let rowLabels;
 
 function ready(data) {
   // Controls.
@@ -36,16 +33,17 @@ function ready(data) {
   camera.add(pointLight);
   scene.add(camera);
   scene.add(ambientLight);
+  scene.add(ah);
 
   // Build plot.
   const size = 10;
   const corrData = prepData(data);
-  layout = getCorrLayout(corrData, { size, type: 'full' });
-  grid = getGrid(layout, { size, colour: '#999' });
-  discs = getDiscs(layout, { size });
+  const layout = getCorrLayout(corrData, { size, type: 'full' });
+  const grid = getGrid(layout, { size, colour: '#999' });
+  const discs = getDiscs(layout, { size });
   const labels = getLabels(layout, { size });
-  rowLabels = labels.rowLabels;
-  colLabels = labels.colLabels;
+  const rowLabels = labels.rowLabels;
+  const colLabels = labels.colLabels;
 
   // Positioning.
   const dim = size * data.length;
@@ -68,6 +66,10 @@ function ready(data) {
 
   // Add listeners.
   addListener(layout, grid, discs, colLabels, rowLabels);
+
+  // camera.rotation.y = Math.PI / 2;
+  // camera.updateProjectionMatrix();
+  // console.log(camera.rotation.y);
 }
 
 function init() {

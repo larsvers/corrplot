@@ -4,6 +4,7 @@ import camera from '../core/camera';
 import controls from '../core/controls';
 import { highlightCells, fadeOutMeshes } from './handler';
 import { lowlight } from './highlight';
+import { getUpfromAngle } from '../app/utils';
 
 // Actions.
 function highlightSelect(layout, grid) {
@@ -103,6 +104,16 @@ function focusOnQuality() {
     .addEventListener('click', move);
 }
 
+function tiltGrid() {
+  const up = { x: -1, y: 1, z: 0 };
+
+  function tilt() {
+    gsap.to(camera.up, up);
+  }
+
+  document.querySelector('#tilt-grid').addEventListener('click', tilt);
+}
+
 // Main attaching function.
 function addListener(layout, grid, discs, colLabels, rowLabels) {
   highlightSelect(layout, grid);
@@ -110,6 +121,7 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   removeAutoCorrelation(discs);
   removeLowerDiscs(discs);
   removeLowerGrid(grid, colLabels);
+  tiltGrid();
   removeAllButQuality(discs, grid, rowLabels);
   focusOnQuality();
 }
