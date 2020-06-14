@@ -33,7 +33,7 @@ function ready(data) {
   camera.add(pointLight);
   scene.add(camera);
   scene.add(ambientLight);
-  scene.add(ah);
+  // scene.add(ah);
 
   // Build plot.
   const size = 10;

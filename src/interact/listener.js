@@ -4,7 +4,13 @@ import camera from '../core/camera';
 import controls from '../core/controls';
 import { highlightCells, fadeOutMeshes } from './handler';
 import { lowlight } from './highlight';
-import { getUpfromAngle } from '../app/utils';
+
+// Helpers.
+function rotateSprites(sprites, degrees) {
+  const radians = (degrees * Math.PI) / 180;
+  const spriteMaterials = sprites.children.map(d => d.material);
+  gsap.to(spriteMaterials, { rotation: radians });
+}
 
 // Actions.
 function highlightSelect(layout, grid) {
@@ -78,7 +84,18 @@ function removeAllButQuality(discs, grid, rowLabels) {
     });
 }
 
-function focusOnQuality() {
+function tiltGrid(labels) {
+  const up = { x: -1, y: 1, z: 0 };
+
+  function tilt() {
+    gsap.to(camera.up, up);
+    rotateSprites(labels, 0);
+  }
+
+  document.querySelector('#tilt-grid').addEventListener('click', tilt);
+}
+
+function focusOnQuality(labels) {
   // Camera move/zoom
   const zoom = { zoom: 1.5 };
   const to = { x: 60, y: -100, z: 20 };
@@ -96,22 +113,14 @@ function focusOnQuality() {
       .to(camera.position, to, 0)
       .to(camera.up, up, 0)
       .to(controls.target, at, 0);
+
+    rotateSprites(labels, 90);
   }
 
   // Add listener.
   document
     .querySelector('#move-camera-position')
     .addEventListener('click', move);
-}
-
-function tiltGrid() {
-  const up = { x: -1, y: 1, z: 0 };
-
-  function tilt() {
-    gsap.to(camera.up, up);
-  }
-
-  document.querySelector('#tilt-grid').addEventListener('click', tilt);
 }
 
 // Main attaching function.
@@ -121,9 +130,9 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   removeAutoCorrelation(discs);
   removeLowerDiscs(discs);
   removeLowerGrid(grid, colLabels);
-  tiltGrid();
+  tiltGrid(colLabels);
   removeAllButQuality(discs, grid, rowLabels);
-  focusOnQuality();
+  focusOnQuality(colLabels);
 }
 
 export default addListener;
