@@ -1,20 +1,19 @@
 import {
   CylinderGeometry,
-  MeshLambertMaterial,
-  MeshPhongMaterial,
+  MeshBasicMaterial,
   Mesh,
   Group,
   ConeGeometry,
 } from 'three/build/three.module';
 
-import { scaleLinear, scaleSequential } from 'd3-scale/src/index';
+import { scaleLinear, scaleSqrt, scaleSequential } from 'd3-scale/src/index';
 import { interpolateRdBu } from 'd3-scale-chromatic/src/index';
 
 function getDiscs(data, { size = 1 } = {}) {
   const grid = new Group();
 
   // Scales
-  const widthScale = scaleLinear()
+  const widthScale = scaleSqrt()
     .domain([0, 1])
     .range([0, (size * 0.9) / 2]);
 
@@ -36,8 +35,7 @@ function getDiscs(data, { size = 1 } = {}) {
 
     // Make discs.
     const geo = new CylinderGeometry(width, width, height, 20, 10, false);
-    // const geo = new ConeGeometry(width, height);
-    const mat = new MeshPhongMaterial({
+    const mat = new MeshBasicMaterial({
       color: col,
       transparent: true,
     });
@@ -55,8 +53,6 @@ function getDiscs(data, { size = 1 } = {}) {
       d.position[1],
       d.value > 0 ? height / 2 + corr : -height / 2 - corr
     );
-
-    mesh.castShadow = true;
 
     grid.add(mesh);
   });

@@ -1,7 +1,7 @@
 const state = {
   colours: {
     background: '#EDEBEB',
-    gridBase: '#FEF9E7',
+    gridBase: '#eee',
     gridPositive: '#62A9EB',
     gridNegative: '#F18E75',
   },

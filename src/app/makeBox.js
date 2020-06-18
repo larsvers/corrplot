@@ -7,15 +7,13 @@ import {
 } from 'three/build/three.module';
 
 function getBox() {
-  const geo = new BoxBufferGeometry(1000, 1000, 1000);
+  const geo = new BoxBufferGeometry(1000, 1000, 400);
   const mat = new MeshStandardMaterial({
-    color: '#FDEBD0',
+    color: '#f7f7f7',
     side: DoubleSide,
   });
 
   const mesh = new Mesh(geo, mat);
-
-  mesh.receiveShadow = true;
 
   return mesh;
 }

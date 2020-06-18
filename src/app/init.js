@@ -5,12 +5,11 @@
 import { csv } from 'd3-fetch/src/index';
 import { autoType } from 'd3-dsv/src/index';
 
-import { CameraHelper } from 'three/build/three.module';
 import animate from './animate';
 import scene from '../core/scene';
 import camera from '../core/camera';
 import controls from '../core/controls';
-import { ambientLight, pointLight, directionalLight } from '../core/lights';
+import { ambientLight, pointLight } from '../core/lights';
 
 import prepData from './data';
 import getBox from './makeBox';
@@ -20,7 +19,6 @@ import getDiscs from './makeDiscs';
 import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
 import addListener from '../interact/listener';
-import { ah } from './utils';
 
 // Variables the init module exports
 let box;
@@ -35,19 +33,6 @@ function ready(data) {
   camera.add(pointLight);
   scene.add(camera);
   scene.add(ambientLight);
-
-  directionalLight.position.set(0, -100, 0);
-  directionalLight.shadow.camera.left = -100;
-  directionalLight.shadow.camera.right = 100;
-  directionalLight.shadow.camera.top = 100;
-  directionalLight.shadow.camera.bottom = -100;
-  directionalLight.shadow.camera.far = 1000;
-  console.log(directionalLight.shadow.camera);
-  scene.add(directionalLight);
-
-  const ch = new CameraHelper(directionalLight.shadow.camera);
-  scene.add(ch);
-  scene.add(ah);
 
   // Build plot.
   const size = 10;
@@ -82,16 +67,12 @@ function ready(data) {
 
   // Add listeners.
   addListener(layout, grid, discs, colLabels, rowLabels);
-
-  // camera.rotation.y = Math.PI / 2;
-  // camera.updateProjectionMatrix();
-  // console.log(camera.rotation.y);
 }
 
 function init() {
   // Just load the data and call the main func.
   csv('../../data/corr.csv', autoType).then(ready);
-  // csv('../../data/corr-s.csv', autoType).then(ready);
 }
+
 export default init;
 export { box };

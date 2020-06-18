@@ -20,8 +20,11 @@ function getGrid(data, { size = 1, colour = 0x00000 } = {}) {
   const geo = new PlaneBufferGeometry(size, size);
 
   // Line meshes.
-  const matLine = new LineBasicMaterial({ color: new Color(colour) });
   const edgeGeo = new EdgesGeometry(geo);
+  const matLine = new LineBasicMaterial({
+    color: new Color(colour),
+    transparent: false, // otherwise it'll all go! 😮
+  });
   const baseSquareLine = new LineSegments(edgeGeo, matLine);
 
   const matSquare = new MeshLambertMaterial({
