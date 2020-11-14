@@ -3,12 +3,12 @@ import gsap from 'gsap/src/index';
 import camera from '../core/camera';
 import controls from '../core/controls';
 import { highlightCells, fadeOutMeshes } from './handler';
-import { lowlight } from './highlight';
+import { lowlightGrid } from './highlight';
 
 // Helpers.
 function rotateSprites(sprites, degrees) {
   const radians = (degrees * Math.PI) / 180;
-  const spriteMaterials = sprites.children.map(d => d.material);
+  const spriteMaterials = sprites.children.map((d) => d.material);
   gsap.to(spriteMaterials, { rotation: radians });
 }
 
@@ -16,7 +16,7 @@ function rotateSprites(sprites, degrees) {
 function highlightSelect(layout, grid) {
   document
     .querySelector('#highlight-select')
-    .addEventListener('change', function() {
+    .addEventListener('change', function () {
       // Use `.call` to pass through `this`.
       highlightCells.call(this, layout, grid);
     });
@@ -25,28 +25,26 @@ function highlightSelect(layout, grid) {
 function resetGridColour(grid) {
   document
     .querySelector('#reset-grid-colour')
-    .addEventListener('click', function() {
-      lowlight(
-        grid.children.filter(d => d.type === 'Mesh').map(d => d.material)
-      );
+    .addEventListener('click', function () {
+      lowlightGrid(grid);
     });
 }
 
 function removeAutoCorrelation(discs) {
   document
     .querySelector('#remove-auto-corr')
-    .addEventListener('click', function() {
-      fadeOutMeshes(discs, d => d.userData.value === 1);
+    .addEventListener('click', function () {
+      fadeOutMeshes(discs, (d) => d.userData.value === 1);
     });
 }
 
 function removeLowerDiscs(discs) {
   document
     .querySelector('#remove-lower-discs')
-    .addEventListener('click', function() {
+    .addEventListener('click', function () {
       fadeOutMeshes(
         discs,
-        d => d.userData.index[1] <= d.userData.index[0],
+        (d) => d.userData.index[1] <= d.userData.index[0],
         0.01
       );
     });
@@ -55,32 +53,32 @@ function removeLowerDiscs(discs) {
 function removeLowerGrid(grid, colLabels) {
   document
     .querySelector('#remove-lower-grid')
-    .addEventListener('click', function() {
+    .addEventListener('click', function () {
       // Remove grid parts.
       fadeOutMeshes(
         grid,
-        d => d.userData.index[1] <= d.userData.index[0],
+        (d) => d.userData.index[1] <= d.userData.index[0],
         0.01,
         false
       );
 
       // Remove label.
-      fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
+      fadeOutMeshes(colLabels, (d) => d.userData.col === 'quality', 0.1);
     });
 }
 
 function removeAllButQuality(discs, grid, rowLabels) {
   document
     .querySelector('#remove-all-but-quality')
-    .addEventListener('click', function() {
+    .addEventListener('click', function () {
       // Fade out the discs.
-      fadeOutMeshes(discs, d => d.userData.row !== 'quality', 0.01);
+      fadeOutMeshes(discs, (d) => d.userData.row !== 'quality', 0.01);
 
       // Fade out the grid.
-      fadeOutMeshes(grid, d => d.userData.row !== 'quality', 0.01, false);
+      fadeOutMeshes(grid, (d) => d.userData.row !== 'quality', 0.01, false);
 
       // Fade out the labels.
-      fadeOutMeshes(rowLabels, d => d.userData.row !== 'quality', 0.1);
+      fadeOutMeshes(rowLabels, (d) => d.userData.row !== 'quality', 0.1);
     });
 }
 
@@ -123,6 +121,26 @@ function focusOnQuality(labels) {
     .addEventListener('click', move);
 }
 
+function setCameraBack() {
+  function onUpdate() {
+    camera.updateProjectionMatrix();
+  }
+
+  function moveBack() {
+    gsap
+      .timeline({ onUpdate })
+      .to(camera, { zoom: 1 }, 0)
+      .to(camera.position, { x: 0, y: 0, z: 100 }, 0)
+      .to(camera.up, { x: 0, y: 1, z: 0 }, 0)
+      .to(controls.target, { x: 0, y: 0, z: 0 }, 0);
+  }
+
+  // Add listener.
+  document
+    .querySelector('#move-camera-back')
+    .addEventListener('click', moveBack);
+}
+
 // Main attaching function.
 function addListener(layout, grid, discs, colLabels, rowLabels) {
   highlightSelect(layout, grid);
@@ -133,6 +151,7 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   tiltGrid(colLabels);
   removeAllButQuality(discs, grid, rowLabels);
   focusOnQuality(colLabels);
+  setCameraBack();
 }
 
 export default addListener;

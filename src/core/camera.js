@@ -8,7 +8,7 @@ function getCameraParams(aspect) {
     right: (aspect * viewSize) / 2,
     top: viewSize / 2,
     bottom: -viewSize / 2,
-    near: 0,
+    near: 0.1,
     far: 1000,
   };
 }

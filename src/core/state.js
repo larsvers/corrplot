@@ -1,6 +1,6 @@
 const state = {
   colours: {
-    background: '#EDEBEB',
+    background: 'aliceblue',
     gridBase: '#eee',
     gridPositive: '#62A9EB',
     gridNegative: '#F18E75',

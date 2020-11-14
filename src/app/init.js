@@ -19,8 +19,11 @@ import getDiscs from './makeDiscs';
 import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
 import addListener from '../interact/listener';
+import update from './update';
 
 // Variables the init module exports
+let layout;
+let grid;
 let box;
 
 function ready(data) {
@@ -37,9 +40,9 @@ function ready(data) {
   // Build plot.
   const size = 10;
   const corrData = prepData(data);
-  const layout = getCorrLayout(corrData, { size, type: 'full' });
+  layout = getCorrLayout(corrData, { size, type: 'full' });
   box = getBox();
-  const grid = getGrid(layout, { size, colour: '#999' });
+  grid = getGrid(layout, { size, colour: '#999' });
   const discs = getDiscs(layout, { size });
   const labels = getLabels(layout, { size });
   const rowLabels = labels.rowLabels;
@@ -53,7 +56,7 @@ function ready(data) {
   rowLabels.position.set(-dim / 2, -dim / 2, 0);
 
   // Build scene.
-  scene.add(box);
+  // scene.add(box);
   scene.add(grid);
   scene.add(discs);
   scene.add(colLabels);
@@ -61,6 +64,9 @@ function ready(data) {
 
   // Kick off animation.
   animate();
+
+  // Update.
+  update();
 
   // Build UI.
   buildDropdown(layout);
@@ -72,7 +78,8 @@ function ready(data) {
 function init() {
   // Just load the data and call the main func.
   csv('../../data/corr.csv', autoType).then(ready);
+  // window.addEventListener('resize', update);
 }
 
 export default init;
-export { box };
+export { layout, grid, box };

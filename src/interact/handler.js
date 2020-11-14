@@ -7,9 +7,9 @@ import { removeMeshes } from '../app/utils';
  * @param { Array } layout The layout
  * @param { Object3D } grid The grid (lines and planes) .
  */
-function highlightCells(layout, grid) {
+function highlightCells(layout, grid, string) {
   // Get the values from the `select` element's values.
-  const value = this.value.split(' | ');
+  const value = string ? string.split(' | ') : this.value.split(' | ');
 
   // Highlight the cell/s.
   highlight(layout, grid, {
@@ -27,8 +27,8 @@ function highlightCells(layout, grid) {
  */
 function fadeOutMeshes(group, filterFunc, staggerTime = 0.1, scaling = true) {
   const meshes = group.children.filter(filterFunc);
-  const materials = meshes.map(d => d.material);
-  const scales = meshes.map(d => d.scale);
+  const materials = meshes.map((d) => d.material);
+  const scales = meshes.map((d) => d.scale);
 
   if (scaling) {
     gsap
