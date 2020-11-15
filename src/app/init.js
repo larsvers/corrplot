@@ -25,6 +25,10 @@ import update from './update';
 let layout;
 let grid;
 let box;
+let discs;
+let labels;
+let rowLabels;
+let colLabels;
 
 function ready(data) {
   // Controls.
@@ -43,10 +47,10 @@ function ready(data) {
   layout = getCorrLayout(corrData, { size, type: 'full' });
   box = getBox();
   grid = getGrid(layout, { size, colour: '#999' });
-  const discs = getDiscs(layout, { size });
-  const labels = getLabels(layout, { size });
-  const rowLabels = labels.rowLabels;
-  const colLabels = labels.colLabels;
+  discs = getDiscs(layout, { size });
+  labels = getLabels(layout, { size });
+  rowLabels = labels.rowLabels;
+  colLabels = labels.colLabels;
 
   // Positioning.
   const dim = size * data.length;
@@ -82,4 +86,4 @@ function init() {
 }
 
 export default init;
-export { layout, grid, box };
+export { layout, grid, box, discs, labels, rowLabels, colLabels };

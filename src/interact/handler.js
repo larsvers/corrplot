@@ -1,4 +1,5 @@
 import gsap from 'gsap/src/index';
+import camera from '../core/camera';
 import highlight from './highlight';
 import { removeMeshes } from '../app/utils';
 
@@ -27,8 +28,8 @@ function highlightCells(layout, grid, string) {
  */
 function fadeOutMeshes(group, filterFunc, staggerTime = 0.1, scaling = true) {
   const meshes = group.children.filter(filterFunc);
-  const materials = meshes.map((d) => d.material);
-  const scales = meshes.map((d) => d.scale);
+  const materials = meshes.map(d => d.material);
+  const scales = meshes.map(d => d.scale);
 
   if (scaling) {
     gsap
@@ -39,9 +40,36 @@ function fadeOutMeshes(group, filterFunc, staggerTime = 0.1, scaling = true) {
   } else {
     gsap
       .timeline()
-      .to(materials, { opacity: 0, stagger: staggerTime }, 0)
+      .to(materials, { opacity: 0 }, 0)
       .eventCallback('onComplete', removeMeshes, [group, meshes]);
   }
 }
 
-export { highlightCells, fadeOutMeshes };
+function rotateSprites(sprites, degrees) {
+  const radians = (degrees * Math.PI) / 180;
+  const spriteMaterials = sprites.children.map(d => d.material);
+  gsap.to(spriteMaterials, { rotation: radians });
+}
+
+function focusQuality(labels) {
+  // Camera move/zoom
+  const zoom = { zoom: 1.5 };
+  const to = { x: 50, y: -100, z: 20 };
+  const up = { x: 0, y: 0, z: 1 };
+  // const at = { x: 15, y: 0, z: 0 };
+
+  function onUpdate() {
+    camera.updateProjectionMatrix();
+  }
+
+  gsap
+    .timeline({ onUpdate })
+    .to(camera, zoom, 0)
+    .to(camera.position, to, 0)
+    .to(camera.up, up, 0);
+  // .to(controls.target, at, 0); // target seemingly not available
+
+  rotateSprites(labels, 90);
+}
+
+export { highlightCells, fadeOutMeshes, rotateSprites, focusQuality };

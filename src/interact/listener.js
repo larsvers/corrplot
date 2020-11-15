@@ -2,15 +2,8 @@
 import gsap from 'gsap/src/index';
 import camera from '../core/camera';
 import controls from '../core/controls';
-import { highlightCells, fadeOutMeshes } from './handler';
+import { highlightCells, fadeOutMeshes, rotateSprites } from './handler';
 import { lowlightGrid } from './highlight';
-
-// Helpers.
-function rotateSprites(sprites, degrees) {
-  const radians = (degrees * Math.PI) / 180;
-  const spriteMaterials = sprites.children.map((d) => d.material);
-  gsap.to(spriteMaterials, { rotation: radians });
-}
 
 // Actions.
 function highlightSelect(layout, grid) {
@@ -34,7 +27,7 @@ function removeAutoCorrelation(discs) {
   document
     .querySelector('#remove-auto-corr')
     .addEventListener('click', function () {
-      fadeOutMeshes(discs, (d) => d.userData.value === 1);
+      fadeOutMeshes(discs, d => d.userData.value === 1);
     });
 }
 
@@ -44,7 +37,7 @@ function removeLowerDiscs(discs) {
     .addEventListener('click', function () {
       fadeOutMeshes(
         discs,
-        (d) => d.userData.index[1] <= d.userData.index[0],
+        d => d.userData.index[1] <= d.userData.index[0],
         0.01
       );
     });
@@ -57,13 +50,13 @@ function removeLowerGrid(grid, colLabels) {
       // Remove grid parts.
       fadeOutMeshes(
         grid,
-        (d) => d.userData.index[1] <= d.userData.index[0],
+        d => d.userData.index[1] <= d.userData.index[0],
         0.01,
         false
       );
 
       // Remove label.
-      fadeOutMeshes(colLabels, (d) => d.userData.col === 'quality', 0.1);
+      fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
     });
 }
 
@@ -72,13 +65,13 @@ function removeAllButQuality(discs, grid, rowLabels) {
     .querySelector('#remove-all-but-quality')
     .addEventListener('click', function () {
       // Fade out the discs.
-      fadeOutMeshes(discs, (d) => d.userData.row !== 'quality', 0.01);
+      fadeOutMeshes(discs, d => d.userData.row !== 'quality', 0.01);
 
       // Fade out the grid.
-      fadeOutMeshes(grid, (d) => d.userData.row !== 'quality', 0.01, false);
+      fadeOutMeshes(grid, d => d.userData.row !== 'quality', 0.01, false);
 
       // Fade out the labels.
-      fadeOutMeshes(rowLabels, (d) => d.userData.row !== 'quality', 0.1);
+      fadeOutMeshes(rowLabels, d => d.userData.row !== 'quality', 0.1);
     });
 }
 

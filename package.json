@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "build": "rollup --config",
-    "watch": "rollup --config --watch"
+    "watch": "rollup --config --watch",
+    "serve": "live-server -q",
+    "start": "npm run serve & npm run watch"
   },
   "author": "LV",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "@babel/preset-env": "^7.8.4",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.0",
+    "live-server": "^1.2.1",
     "rollup": "^1.31.0",
     "rollup-plugin-babel": "^4.3.3"
   },
