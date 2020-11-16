@@ -60,6 +60,24 @@ function removeLowerGrid(grid, colLabels) {
     });
 }
 
+function addLowerGrid(grid, colLabels) {
+  document
+    .querySelector('#add-lower-grid')
+    .addEventListener('click', function () {
+      // Remove grid parts.
+      fadeOutMeshes(
+        grid,
+        d => d.userData.index[1] <= d.userData.index[0],
+        0.01,
+        false,
+        'show'
+      );
+
+      // // Remove label.
+      // fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
+    });
+}
+
 function removeAllButQuality(discs, grid, rowLabels) {
   document
     .querySelector('#remove-all-but-quality')
@@ -141,6 +159,7 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   removeAutoCorrelation(discs);
   removeLowerDiscs(discs);
   removeLowerGrid(grid, colLabels);
+  addLowerGrid(grid, colLabels);
   tiltGrid(colLabels);
   removeAllButQuality(discs, grid, rowLabels);
   focusOnQuality(colLabels);

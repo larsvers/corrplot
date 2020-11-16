@@ -1,7 +1,7 @@
 import gsap from 'gsap/src/index';
 import camera from '../core/camera';
 import highlight from './highlight';
-import { removeMeshes } from '../app/utils';
+import { toggleGrid } from '../app/utils';
 
 /**
  * Gets the user selected value and triggers the highlight func.
@@ -20,13 +20,23 @@ function highlightCells(layout, grid, string) {
   });
 }
 
+// TODO: is a mess.... overarching goal is to make it work
+// in both directions or needs to have a fade in sibling.
+// Also, maybe we can tame the conditionals.
+
 /**
  * Fades out and removes meshes.
  * @param { Object3D } group The group of objects (scene, group, ...).
  * @param { Function } filterFunc The function to filter the meshes from the group
  * @param { Number } staggerTime Stagger duration
  */
-function fadeOutMeshes(group, filterFunc, staggerTime = 0.1, scaling = true) {
+function fadeOutMeshes(
+  group,
+  filterFunc,
+  staggerTime = 0.1,
+  scaling = true,
+  gridAim = 'hide'
+) {
   const meshes = group.children.filter(filterFunc);
   const materials = meshes.map(d => d.material);
   const scales = meshes.map(d => d.scale);
@@ -35,13 +45,15 @@ function fadeOutMeshes(group, filterFunc, staggerTime = 0.1, scaling = true) {
     gsap
       .timeline()
       .to(scales, { y: 0.1, stagger: staggerTime }, 0)
-      .to(materials, { opacity: 0, stagger: staggerTime }, 0)
-      .eventCallback('onComplete', removeMeshes, [group, meshes]);
-  } else {
+      .to(materials, { opacity: 0, stagger: staggerTime }, 0);
+    // .eventCallback('onComplete', toggleGrid, [group, meshes]);
+  } else if (gridAim === 'hide') {
     gsap
       .timeline()
       .to(materials, { opacity: 0 }, 0)
-      .eventCallback('onComplete', removeMeshes, [group, meshes]);
+      .eventCallback('onComplete', toggleGrid, [gridAim, group, meshes]);
+  } else {
+    toggleGrid(gridAim, group, meshes);
   }
 }
 
@@ -72,4 +84,17 @@ function focusQuality(labels) {
   rotateSprites(labels, 90);
 }
 
-export { highlightCells, fadeOutMeshes, rotateSprites, focusQuality };
+function focusAll() {
+  function onUpdate() {
+    camera.updateProjectionMatrix();
+  }
+
+  gsap
+    .timeline({ onUpdate })
+    .to(camera, { zoom: 1 }, 0)
+    .to(camera.position, { x: 0, y: 0, z: 100 }, 0)
+    .to(camera.up, { x: 0, y: 1, z: 0 }, 0)
+    .to(controls.target, { x: 0, y: 0, z: 0 }, 0);
+}
+
+export { highlightCells, fadeOutMeshes, rotateSprites, focusQuality, focusAll };

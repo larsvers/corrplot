@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/prefer-default-export */
 
-import { AxesHelper } from 'three/build/three.module';
+import { AxesHelper, Color } from 'three/build/three.module';
 
 /**
  * Sets the renderer's canvas width based on the available width
@@ -18,14 +18,35 @@ function setRendererSize(renderer) {
   return needResize;
 }
 
+let gridKeep = [];
+let gridToggle = [];
+
+// TODO: this one works now, as in we save the upper
+// and lower (gridKeep) half iof the grid (gridToggle).
+// But we need to sort out the handler. Not very elegant...
+
 /**
  * Removes given meshes from the specified parent (scene or group, ...).
+ * @param { string } aim Do we want to hide or show the grid?
  * @param { Object3D } parent The parent element from which to remove the meshes
  * @param { Array } meshes The meshes to remove
  */
-function removeMeshes(parent, meshes) {
-  const uuids = meshes.map(mesh => mesh.uuid);
-  parent.children = parent.children.filter(mesh => !uuids.includes(mesh.uuid));
+function toggleGrid(aim, parent, meshes) {
+  if (aim === 'hide') {
+    const uuids = meshes.map(mesh => mesh.uuid);
+
+    gridKeep = gridKeep.length
+      ? gridKeep
+      : parent.children.filter(mesh => !uuids.includes(mesh.uuid));
+
+    gridToggle = gridToggle.length
+      ? gridToggle
+      : parent.children.filter(mesh => uuids.includes(mesh.uuid));
+
+    parent.children = gridKeep;
+  } else {
+    parent.children = [...gridKeep, ...gridToggle];
+  }
 }
 
 /**
@@ -43,4 +64,4 @@ function getUpfromAngle(angle, type = 'degree') {
 
 const ah = new AxesHelper(100);
 
-export { setRendererSize, removeMeshes, getUpfromAngle, ah };
+export { setRendererSize, toggleGrid, getUpfromAngle, ah };

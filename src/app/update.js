@@ -7,6 +7,7 @@ import {
   fadeOutMeshes,
   rotateSprites,
   focusQuality,
+  focusAll,
 } from '../interact/handler';
 import { lowlightGrid } from '../interact/highlight';
 import { layout, grid, discs, rowLabels, colLabels } from './init';
