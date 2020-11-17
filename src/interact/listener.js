@@ -2,7 +2,14 @@
 import gsap from 'gsap/src/index';
 import camera from '../core/camera';
 import controls from '../core/controls';
-import { highlightCells, fadeOutMeshes, rotateSprites } from './handler';
+import {
+  highlightCells,
+  fadeMeshes,
+  toggleGrid,
+  tiltDown,
+  tiltUp,
+  rotateSprites,
+} from './handler';
 import { lowlightGrid } from './highlight';
 
 // Actions.
@@ -27,7 +34,7 @@ function removeAutoCorrelation(discs) {
   document
     .querySelector('#remove-auto-corr')
     .addEventListener('click', function () {
-      fadeOutMeshes(discs, d => d.userData.value === 1);
+      fadeMeshes('hide', discs, d => d.userData.value === 1);
     });
 }
 
@@ -35,7 +42,8 @@ function removeLowerDiscs(discs) {
   document
     .querySelector('#remove-lower-discs')
     .addEventListener('click', function () {
-      fadeOutMeshes(
+      fadeMeshes(
+        'hide',
         discs,
         d => d.userData.index[1] <= d.userData.index[0],
         0.01
@@ -47,16 +55,9 @@ function removeLowerGrid(grid, colLabels) {
   document
     .querySelector('#remove-lower-grid')
     .addEventListener('click', function () {
-      // Remove grid parts.
-      fadeOutMeshes(
-        grid,
-        d => d.userData.index[1] <= d.userData.index[0],
-        0.01,
-        false
-      );
-
+      toggleGrid('hide', grid);
       // Remove label.
-      fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
+      fadeMeshes('hide', colLabels, d => d.userData.col === 'quality');
     });
 }
 
@@ -64,17 +65,22 @@ function addLowerGrid(grid, colLabels) {
   document
     .querySelector('#add-lower-grid')
     .addEventListener('click', function () {
-      // Remove grid parts.
-      fadeOutMeshes(
-        grid,
-        d => d.userData.index[1] <= d.userData.index[0],
-        0.01,
-        false,
-        'show'
-      );
+      toggleGrid('show', grid);
+      // Add label.
+      fadeMeshes('show', colLabels, d => d.userData.col === 'quality');
+    });
+}
 
-      // // Remove label.
-      // fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
+function addLowerDiscs(discs) {
+  document
+    .querySelector('#add-lower-discs')
+    .addEventListener('click', function () {
+      fadeMeshes(
+        'show',
+        discs,
+        d => d.userData.index[1] <= d.userData.index[0],
+        0.01
+      );
     });
 }
 
@@ -83,25 +89,37 @@ function removeAllButQuality(discs, grid, rowLabels) {
     .querySelector('#remove-all-but-quality')
     .addEventListener('click', function () {
       // Fade out the discs.
-      fadeOutMeshes(discs, d => d.userData.row !== 'quality', 0.01);
-
-      // Fade out the grid.
-      fadeOutMeshes(grid, d => d.userData.row !== 'quality', 0.01, false);
-
+      fadeMeshes('hide', discs, d => d.userData.row !== 'quality', 0.01);
       // Fade out the labels.
-      fadeOutMeshes(rowLabels, d => d.userData.row !== 'quality', 0.1);
+      fadeMeshes('hide', rowLabels, d => d.userData.row !== 'quality');
+      // Fade out the grid.
+      toggleGrid('hide', grid, 'qualityRow');
+    });
+}
+
+function addAllButQuality(discs, grid, rowLabels) {
+  document
+    .querySelector('#add-all-but-quality')
+    .addEventListener('click', function () {
+      // Fade out the discs.
+      fadeMeshes('show', discs, d => d.userData.row !== 'quality', 0.01);
+      // Fade out the labels.
+      fadeMeshes('show', rowLabels, d => d.userData.row !== 'quality');
+      // Fade out the grid.
+      toggleGrid('show', grid, 'qualityRow');
     });
 }
 
 function tiltGrid(labels) {
-  const up = { x: -1, y: 1, z: 0 };
+  document
+    .querySelector('#tilt-grid')
+    .addEventListener('click', () => tiltDown(labels));
+}
 
-  function tilt() {
-    gsap.to(camera.up, up);
-    rotateSprites(labels, 0);
-  }
-
-  document.querySelector('#tilt-grid').addEventListener('click', tilt);
+function tiltGridBack(labels) {
+  document
+    .querySelector('#tilt-grid-back')
+    .addEventListener('click', () => tiltUp(labels));
 }
 
 function focusOnQuality(labels) {
@@ -160,8 +178,11 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   removeLowerDiscs(discs);
   removeLowerGrid(grid, colLabels);
   addLowerGrid(grid, colLabels);
+  addLowerDiscs(discs);
   tiltGrid(colLabels);
+  tiltGridBack(colLabels);
   removeAllButQuality(discs, grid, rowLabels);
+  addAllButQuality(discs, grid, rowLabels);
   focusOnQuality(colLabels);
   setCameraBack();
 }

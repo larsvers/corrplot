@@ -20,6 +20,7 @@ import getLabels from './makeLabels';
 import buildDropdown from '../ui/buildDropdown';
 import addListener from '../interact/listener';
 import update from './update';
+import { setGridMeshes } from './utils';
 
 // Variables the init module exports
 let layout;
@@ -51,6 +52,9 @@ function ready(data) {
   labels = getLabels(layout, { size });
   rowLabels = labels.rowLabels;
   colLabels = labels.colLabels;
+
+  // Grid parts.
+  setGridMeshes(grid);
 
   // Positioning.
   const dim = size * data.length;

@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/src/ScrollTrigger';
 import camera from '../core/camera';
 import {
   highlightCells,
-  fadeOutMeshes,
+  fadeMeshes,
   rotateSprites,
   focusQuality,
   focusAll,
@@ -61,7 +61,7 @@ function setScroll() {
     end: 'bottom center',
     id: 'meshFade',
     markers: true,
-    onEnter: () => fadeOutMeshes(discs, d => d.userData.value === 1),
+    onEnter: () => fadeMeshes('hide', discs, d => d.userData.value === 1),
   });
 
   ScrollTrigger.create({
@@ -71,7 +71,8 @@ function setScroll() {
     id: 'lowerFade',
     markers: true,
     onEnter: () =>
-      fadeOutMeshes(
+      fadeMeshes(
+        'hide',
         discs,
         d => d.userData.index[1] <= d.userData.index[0],
         0.01
@@ -85,13 +86,13 @@ function setScroll() {
     id: 'lowerRemove',
     markers: true,
     onEnter() {
-      fadeOutMeshes(
+      fadeMeshes(
+        'hide',
         grid,
         d => d.userData.index[1] <= d.userData.index[0],
-        0.01,
-        false
+        0.01
       );
-      fadeOutMeshes(colLabels, d => d.userData.col === 'quality', 0.1);
+      fadeMeshes('hide', colLabels, d => d.userData.col === 'quality', 0.1);
     },
   });
 
@@ -115,9 +116,9 @@ function setScroll() {
     markers: true,
     onEnter() {
       // Fade out discs, grid, labels.
-      fadeOutMeshes(discs, d => d.userData.row !== 'quality', 0.01);
-      fadeOutMeshes(grid, d => d.userData.row !== 'quality', 0.01, false);
-      fadeOutMeshes(rowLabels, d => d.userData.row !== 'quality', 0.1);
+      fadeMeshes('hide', discs, d => d.userData.row !== 'quality', 0.01);
+      fadeMeshes('hide', grid, d => d.userData.row !== 'quality', 0.01, false);
+      fadeMeshes('hide', rowLabels, d => d.userData.row !== 'quality', 0.1);
     },
   });
 
