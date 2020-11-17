@@ -3,8 +3,10 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/src/ScrollTrigger';
 import camera from '../core/camera';
 import {
+  tweenZoom,
   highlightCells,
   fadeMeshes,
+  toggleGrid,
   rotateSprites,
   focusQuality,
   focusAll,
@@ -15,6 +17,15 @@ import { layout, grid, discs, rowLabels, colLabels } from './init';
 gsap.registerPlugin(ScrollTrigger);
 
 function setScroll() {
+  ScrollTrigger.create({
+    animation: tweenZoom,
+    trigger: '#section-00',
+    start: 'center center',
+    end: 'bottom center',
+    id: 'zoomIn',
+    scrub: true,
+  });
+
   ScrollTrigger.create({
     trigger: '#section-01',
     start: 'center center',
@@ -59,9 +70,10 @@ function setScroll() {
     trigger: '#section-05',
     start: 'center center',
     end: 'bottom center',
-    id: 'meshFade',
-    markers: true,
+    id: 'autocorrelation',
+    // markers: true,
     onEnter: () => fadeMeshes('hide', discs, d => d.userData.value === 1),
+    onLeaveBack: () => fadeMeshes('show', discs, d => d.userData.value === 1),
   });
 
   ScrollTrigger.create({
@@ -69,7 +81,7 @@ function setScroll() {
     start: 'center center',
     end: 'bottom center',
     id: 'lowerFade',
-    markers: true,
+    // markers: true,
     onEnter: () =>
       fadeMeshes(
         'hide',
@@ -77,6 +89,8 @@ function setScroll() {
         d => d.userData.index[1] <= d.userData.index[0],
         0.01
       ),
+    onLeaveBack: () =>
+      fadeMeshes('show', discs, d => d.userData.value !== 1, 0.01),
   });
 
   ScrollTrigger.create({
@@ -84,15 +98,14 @@ function setScroll() {
     start: 'center center',
     end: 'bottom center',
     id: 'lowerRemove',
-    markers: true,
+    // markers: true,
     onEnter() {
-      fadeMeshes(
-        'hide',
-        grid,
-        d => d.userData.index[1] <= d.userData.index[0],
-        0.01
-      );
-      fadeMeshes('hide', colLabels, d => d.userData.col === 'quality', 0.1);
+      toggleGrid('hide', grid, 'lowerGrid');
+      fadeMeshes('hide', colLabels, d => d.userData.col === 'quality');
+    },
+    onLeaveBack() {
+      toggleGrid('show', grid, 'fullGrid');
+      fadeMeshes('show', colLabels, d => d.userData.col === 'quality');
     },
   });
 
@@ -101,10 +114,14 @@ function setScroll() {
     start: 'center center',
     end: 'bottom center',
     id: 'tilt',
-    markers: true,
+    // markers: true,
     onEnter() {
       gsap.to(camera.up, { x: -1, y: 1, z: 0 });
       rotateSprites(colLabels, 0);
+    },
+    onLeaveBack() {
+      gsap.to(camera.up, { x: 0, y: 1, z: 0 });
+      rotateSprites(colLabels, 90);
     },
   });
 
@@ -113,12 +130,21 @@ function setScroll() {
     start: 'center center',
     end: 'bottom center',
     id: 'lowerRemove',
-    markers: true,
+    // markers: true,
     onEnter() {
-      // Fade out discs, grid, labels.
       fadeMeshes('hide', discs, d => d.userData.row !== 'quality', 0.01);
-      fadeMeshes('hide', grid, d => d.userData.row !== 'quality', 0.01, false);
       fadeMeshes('hide', rowLabels, d => d.userData.row !== 'quality', 0.1);
+      toggleGrid('hide', grid, 'qualityRow');
+    },
+    onLeaveBack() {
+      fadeMeshes(
+        'show',
+        discs,
+        d => d.userData.index[1] > d.userData.index[0],
+        0.01
+      );
+      fadeMeshes('show', rowLabels, d => d, 0.1);
+      toggleGrid('show', grid, 'upperGrid');
     },
   });
 
@@ -127,10 +153,9 @@ function setScroll() {
     start: 'center center',
     end: 'bottom center',
     id: 'qualityFocus',
-    markers: true,
-    onEnter() {
-      focusQuality(colLabels);
-    },
+    // markers: true,
+    onEnter: () => focusQuality(colLabels),
+    onLeaveBack: () => focusAll(colLabels),
   });
 }
 

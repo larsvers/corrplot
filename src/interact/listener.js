@@ -9,6 +9,7 @@ import {
   tiltDown,
   tiltUp,
   rotateSprites,
+  focusAll,
 } from './handler';
 import { lowlightGrid } from './highlight';
 
@@ -151,23 +152,10 @@ function focusOnQuality(labels) {
 }
 
 function setCameraBack() {
-  function onUpdate() {
-    camera.updateProjectionMatrix();
-  }
-
-  function moveBack() {
-    gsap
-      .timeline({ onUpdate })
-      .to(camera, { zoom: 1 }, 0)
-      .to(camera.position, { x: 0, y: 0, z: 100 }, 0)
-      .to(camera.up, { x: 0, y: 1, z: 0 }, 0)
-      .to(controls.target, { x: 0, y: 0, z: 0 }, 0);
-  }
-
   // Add listener.
   document
     .querySelector('#move-camera-back')
-    .addEventListener('click', moveBack);
+    .addEventListener('click', focusAll);
 }
 
 // Main attaching function.

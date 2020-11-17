@@ -35,6 +35,7 @@ function ready(data) {
   // Controls.
   controls.rotateSpeed = 4.0;
   camera.position.set(0, 0, 100);
+  camera.zoom = 0;
   controls.update();
 
   // Lights.

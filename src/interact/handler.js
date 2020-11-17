@@ -3,6 +3,16 @@ import camera from '../core/camera';
 import highlight from './highlight';
 import state from '../core/state';
 
+// Helpers.
+function onUpdate() {
+  camera.updateProjectionMatrix();
+}
+
+// Zoom.
+const tweenZoom = gsap
+  .timeline({ onUpdate })
+  .fromTo(camera, { zoom: 0 }, { zoom: 1 });
+
 // Highlight.
 function highlightCells(layout, grid, string) {
   // Get the values from the `select` element's values.
@@ -33,13 +43,20 @@ function pickGrid(aim, parent, ids) {
   if (aim === 'hide') {
     parent.children = state.grid.full.filter(mesh => !ids.includes(mesh.uuid));
   } else if (aim === 'show') {
-    parent.children = state.grid.full;
+    // parent.children = state.grid.full;
+    parent.children = state.grid.full.filter(mesh => ids.includes(mesh.uuid));
   } else throw Error('wrong aim name');
 }
 
-function toggleGrid(aim, parent, filter = 'lowerGrid') {
-  if (filter === 'lowerGrid') {
+function toggleGrid(aim, parent, filter = 'fullGrid') {
+  if (filter === 'fullGrid') {
+    const uuids = state.grid.full.map(mesh => mesh.uuid);
+    pickGrid(aim, parent, uuids);
+  } else if (filter === 'lowerGrid') {
     const uuids = state.grid.lowerHalf.map(mesh => mesh.uuid);
+    pickGrid(aim, parent, uuids);
+  } else if (filter === 'upperGrid') {
+    const uuids = state.grid.upperHalf.map(mesh => mesh.uuid);
     pickGrid(aim, parent, uuids);
   } else if (filter === 'qualityRow') {
     const uuids = state.grid.quality.map(mesh => mesh.uuid);
@@ -73,36 +90,26 @@ function focusQuality(labels) {
   const zoom = { zoom: 1.5 };
   const to = { x: 50, y: -100, z: 20 };
   const up = { x: 0, y: 0, z: 1 };
-  // const at = { x: 15, y: 0, z: 0 };
-
-  function onUpdate() {
-    camera.updateProjectionMatrix();
-  }
 
   gsap
     .timeline({ onUpdate })
     .to(camera, zoom, 0)
     .to(camera.position, to, 0)
     .to(camera.up, up, 0);
-  // .to(controls.target, at, 0); // target seemingly not available
 
   rotateSprites(labels, 90);
 }
 
 function focusAll() {
-  function onUpdate() {
-    camera.updateProjectionMatrix();
-  }
-
   gsap
     .timeline({ onUpdate })
     .to(camera, { zoom: 1 }, 0)
     .to(camera.position, { x: 0, y: 0, z: 100 }, 0)
-    .to(camera.up, { x: 0, y: 1, z: 0 }, 0)
-    .to(controls.target, { x: 0, y: 0, z: 0 }, 0);
+    .to(camera.up, { x: 0, y: 1, z: 0 }, 0);
 }
 
 export {
+  tweenZoom,
   highlightCells,
   fadeMeshes,
   toggleGrid,

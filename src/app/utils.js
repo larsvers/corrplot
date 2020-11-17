@@ -39,7 +39,13 @@ function setGridMeshes(grid) {
   state.grid.lowerHalf = grid.children.filter(
     d => d.userData.index[1] <= d.userData.index[0]
   );
-  state.grid.quality = grid.children.filter(d => d.userData.row !== 'quality');
+  state.grid.upperHalf = grid.children.filter(
+    d => d.userData.index[1] > d.userData.index[0]
+  );
+  state.grid.quality = grid.children.filter(
+    d =>
+      d.userData.row !== 'quality' || d.userData.index[1] <= d.userData.index[0]
+  );
 }
 
 export { setRendererSize, getUpfromAngle, ah, setGridMeshes };
