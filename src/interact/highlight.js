@@ -13,14 +13,14 @@ import state from '../core/state';
 // Big bang lowlighting for all grid cells
 // back to the original base colour.
 function lowlight(materials) {
-  materials.forEach((d) => (d.color = new Color(state.colours.gridBase)));
+  materials.forEach(d => (d.color = new Color(state.colours.gridBase)));
 }
 
 function lowlightGrid(grid) {
   grid.children
-    .filter((d) => d.type === 'Mesh')
-    .map((d) => d.material)
-    .forEach((d) => (d.color = new Color(state.colours.gridBase)));
+    .filter(d => d.type === 'Mesh')
+    .map(d => d.material)
+    .forEach(d => (d.color = new Color(state.colours.gridBase)));
 }
 
 // Gets the target colour based on the assumption
@@ -48,7 +48,7 @@ function highlightSquare(grid, row, col) {
 
   // Get the square.
   const square = grid.children.filter(
-    (d) => d.type === 'Mesh' && d.userData.row === row && d.userData.col === col
+    d => d.type === 'Mesh' && d.userData.row === row && d.userData.col === col
   );
 
   // Get the materials colour property.
@@ -78,24 +78,23 @@ function highlightSquares(data, grid, row, col) {
   lowlightGrid(grid);
 
   // Get the target square's index.
-  const squareIndex = data.filter((d) => d.row === row && d.col === col)[0]
-    .index;
+  const squareIndex = data.filter(d => d.row === row && d.col === col)[0].index;
 
   // Get all indeces that point to the target square.
-  const dim = max(data.map((d) => d.index[1]));
+  const dim = max(data.map(d => d.index[1]));
   const rowIndeces = range(0, squareIndex[0]);
   const colIndeces = range(squareIndex[1], dim + 1);
   const indeces = [
-    ...rowIndeces.map((d) => [d, squareIndex[1]]),
-    ...colIndeces.map((d) => [squareIndex[0], d]),
+    ...rowIndeces.map(d => [d, squareIndex[1]]),
+    ...colIndeces.map(d => [squareIndex[0], d]),
   ];
 
   // Create an array of all target square meshes.
   // Also - as a side - get the square we want to highlight.
   const squares = [];
   let square;
-  grid.children.forEach((object) => {
-    indeces.forEach((index) => {
+  grid.children.forEach(object => {
+    indeces.forEach(index => {
       if (object.type === 'Mesh' && isEqual(object.userData.index, index)) {
         squares.push(object);
         if (isEqual(object.userData.index, squareIndex)) square = object;
@@ -105,7 +104,7 @@ function highlightSquares(data, grid, row, col) {
 
   // Get an array of the target mesh's colour objects.
   // Also, get the target colour from the main square.
-  const colours = squares.map((d) => d.material.color);
+  const colours = squares.map(d => d.material.color);
   const targetColour = getTargetColour(square.userData.value);
 
   gsap.to(colours, {
