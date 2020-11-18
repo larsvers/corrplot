@@ -5,26 +5,10 @@
     <title>corrplot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="dist/bundle.css" />
   </head>
   <body>
     <div id="container">
-      <div id="controls">
-        <select name="highlight-corr" id="highlight-select"></select>
-        <button id="reset-grid-colour">Reset grid colour</button>
-        <button id="remove-auto-corr">Remove auto-correlation</button>
-        <button id="remove-lower-discs">Remove lower half discs</button>
-        <button id="remove-lower-grid">Remove lower half grid</button>
-        <button id="add-lower-grid">Add lower half grid</button>
-        <button id="add-lower-discs">Add lower discs</button>
-        <button id="add-auto-corr">Add auto-correlation</button>
-        <button id="tilt-grid">Tilt grid</button>
-        <button id="tilt-grid-back">Tilt grid back up</button>
-        <button id="remove-all-but-quality">Remove all but quality</button>
-        <button id="add-all-but-quality">Add all but quality</button>
-        <button id="move-camera-position">Move that camera</button>
-        <button id="move-camera-back">Move that camera back</button>
-      </div>
       <canvas></canvas>
       <div id="text-container">
         <p id="section-00">
@@ -93,6 +77,20 @@
           perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
           doloremque dolorem?
         </p>
+        <div id="play">
+          <div id="controls">
+            <button id="full-grid">Show full grid</button>
+            <select name="highlight-corr" id="highlight-select"></select>
+            <button id="reset-grid-colour">Reset grid colour</button>
+            <button id="remove-auto-corr">Remove auto-correlation</button>
+            <button id="add-auto-corr">Add auto-correlation</button>
+            <button id="remove-lower-grid">Remove lower half grid</button>
+            <button id="tilt-grid">Tilt grid</button>
+            <button id="tilt-grid-back">Tilt grid back up</button>
+            <button id="add-lower-grid">Add lower half grid</button>
+            <button id="show-quality">Show quality</button>
+          </div>
+        </div>
       </div>
     </div>
 
