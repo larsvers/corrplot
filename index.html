@@ -5,11 +5,74 @@
     <title>corrplot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="dist/bundle.css" />
   </head>
   <body>
     <div id="container">
       <canvas></canvas>
+      <div id="controls">
+        <div class="button-container">
+          <div class="button" id="full-grid">
+            <div class="outer">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="button-text">Full grid</div>
+        </div>
+
+        <select name="highlight-corr" id="highlight-select"></select>
+
+        <div class="button-container">
+          <div class="button" id="reset-colour">
+            <div class="outer">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="button-text">Reset colour</div>
+        </div>
+
+        <div class="button-container">
+          <div class="button toggle" id="auto-corr">
+            <div class="outer glow-on">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="button-text">Auto corrleation</div>
+        </div>
+
+        <div class="button-container">
+          <div class="button toggle" id="lower-grid">
+            <div class="outer glow-on">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="button-text">Lower grid</div>
+        </div>
+
+        <div class="button-container">
+          <div class="button toggle" id="tilt">
+            <div class="outer glow-off">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="button-text">Tilt</div>
+        </div>
+
+        <div class="button-container">
+          <div class="button" id="show-quality">
+            <div class="outer">
+              <div class="inner"></div>
+            </div>
+          </div>
+          <div class="button-text">Focus quality</div>
+        </div>
+      </div>
+
       <div id="text-container">
         <p id="section-00">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
@@ -78,62 +141,17 @@
           doloremque dolorem?
         </p>
         <div id="play">
-          <div id="controls">
-            <div class="button-container">
-              <div class="button" id="full-grid">
-                <div class="outer">
-                  <div class="inner"></div>
+          <div id="big-button-wrap">
+            <div id="big-button-container">
+              <div id="big-button-outer">
+                <div id="big-button-inner">
+                  <div id="big-button-rim">
+                    <div id="big-button-bulb"></div>
+                  </div>
                 </div>
               </div>
-              <div class="button-text">Full grid</div>
             </div>
-
-            <select name="highlight-corr" id="highlight-select"></select>
-
-            <div class="button-container">
-              <div class="button" id="reset-colour">
-                <div class="outer">
-                  <div class="inner"></div>
-                </div>
-              </div>
-              <div class="button-text">Reset colour</div>
-            </div>
-
-            <div class="button-container">
-              <div class="button toggle" id="auto-corr">
-                <div class="outer glow-on">
-                  <div class="inner"></div>
-                </div>
-              </div>
-              <div class="button-text">Auto corrleation</div>
-            </div>
-
-            <div class="button-container">
-              <div class="button toggle" id="lower-grid">
-                <div class="outer glow-on">
-                  <div class="inner"></div>
-                </div>
-              </div>
-              <div class="button-text">Lower grid</div>
-            </div>
-
-            <div class="button-container">
-              <div class="button toggle" id="tilt">
-                <div class="outer glow-off">
-                  <div class="inner"></div>
-                </div>
-              </div>
-              <div class="button-text">Tilt</div>
-            </div>
-
-            <div class="button-container">
-              <div class="button" id="show-quality">
-                <div class="outer">
-                  <div class="inner"></div>
-                </div>
-              </div>
-              <div class="button-text">Focus quality</div>
-            </div>
+            <div id="big-button-text">Interact</div>
           </div>
         </div>
       </div>

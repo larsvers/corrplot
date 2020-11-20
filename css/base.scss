@@ -2,6 +2,7 @@
 
 body {
   margin: 0;
+  font-family: 'DIN-Regular', 'Open Sans', sans-serif;
 }
 
 #container {
@@ -35,15 +36,4 @@ canvas {
   p:first-child {
     margin-top: 90vh;
   }
-}
-
-// Play area
-
-div#play {
-  box-sizing: border-box;
-  position: relative;
-  display: flex;
-  height: 100vh;
-  padding: 2rem 0;
-  background: rgba(255, 255, 255, 0.1);
 }

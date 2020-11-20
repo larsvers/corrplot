@@ -1,0 +1,172 @@
+// Play area
+
+#play {
+  box-sizing: border-box;
+  position: relative;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+
+  transition: all 1s;
+}
+
+#play.interact {
+  pointer-events: none;
+}
+
+#text-container.interact {
+  pointer-events: none;
+}
+
+#play.clear {
+  background: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(0px);
+}
+
+#big-button-wrap {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: all;
+
+  transition: all 1s;
+}
+
+/* Needs a width */
+#big-button-container {
+  width: 120px;
+  height: 120px;
+
+  transition: all 1s;
+}
+
+#big-button-wrap.aside {
+  top: 92%;
+  left: 92%;
+}
+
+#big-button-container.small {
+  width: 80px;
+  height: 80px;
+}
+
+/* Button specific css... */
+#big-button-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1),
+    rgba(230, 230, 230, 0.1) 80%
+  );
+}
+
+#big-button-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 86%;
+  height: 86%;
+  position: relative;
+
+  border-radius: 50%;
+  border: 2px solid #999;
+  background: radial-gradient(
+      ellipse 33% 24% at 50% 92%,
+      rgba(255, 255, 255, 1) 9%,
+      rgba(210, 210, 210, 0.2) 100%
+    ),
+    linear-gradient(
+      to top,
+      rgba(240, 240, 240, 0.5) 0%,
+      rgba(240, 240, 240, 0.4) 50%,
+      rgba(195, 195, 195, 0.8) 100%
+    );
+  /* > 50px container size */
+  box-shadow: 0px 20px 20px -10px rgba(0, 0, 0, 0.3),
+    0px -3px 5px -3px rgba(0, 0, 0, 0.5);
+  /* < 50px container size */
+  /* box-shadow: 0px 8px 9px -7px rgba(0, 0, 0, 0.3), 0px -3px 5px -3px rgba(0, 0, 0, 0.5); */
+
+  transition: box-shadow 0.5s;
+}
+
+#big-button-rim {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 93%;
+  height: 93%;
+  position: relative;
+
+  border-radius: 50%;
+  border: 3px solid #efeaea;
+}
+
+#big-button-bulb {
+  width: 4%;
+  height: 4%;
+  position: relative;
+
+  border-radius: 50%;
+  background: red;
+
+  transition: all 0.1s;
+}
+
+// Text.
+
+#big-button-text {
+  padding-top: 0.8em;
+  font-family: 'Din-Regular';
+  font-weight: 100;
+  font-size: 2em;
+  color: #ccc;
+  opacity: 1;
+
+  transition: padding-top 1s, font-size 1s;
+}
+
+#big-button-text.shrink {
+  padding-top: 0.2em;
+  font-size: 1em;
+}
+
+// Interactions.
+
+#big-button-inner:hover {
+  box-shadow: 0px 14px 20px -10px rgba(0, 0, 0, 0.3),
+    0px -3px 5px -3px rgba(0, 0, 0, 0.5);
+}
+
+#big-button-inner:active {
+  box-shadow: 0px 0px 5px -3px rgba(0, 0, 0, 0.5);
+}
+
+#big-button-inner:active #big-button-bulb {
+  background: #4cb45a;
+}
+
+#big-button-inner.pressed-button {
+  box-shadow: 0px 0px 5px -3px rgba(0, 0, 0, 0.5);
+}
+
+#big-button-bulb.pressed-bulb {
+  background: #4cb45a;
+}

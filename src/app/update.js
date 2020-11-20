@@ -1,6 +1,7 @@
 // Libs, funcs, things.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/src/ScrollTrigger';
+import { ScrambleTextPlugin } from 'gsap/src/ScrambleTextPlugin';
 import camera from '../core/camera';
 import {
   tweenZoom,
@@ -14,7 +15,7 @@ import {
 import { lowlightGrid } from '../interact/highlight';
 import { layout, grid, discs, rowLabels, colLabels } from './init';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
 function setScroll() {
   ScrollTrigger.create({

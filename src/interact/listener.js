@@ -1,5 +1,6 @@
 /* eslint-disable import/no-cycle */
 import { select } from 'd3-selection/src';
+import { gsap } from 'gsap';
 import {
   highlightCells,
   fadeMeshes,
@@ -14,6 +15,7 @@ import { lowlightGrid } from './highlight';
 let autoCorrelation = true;
 let lowerGrid = true;
 let tilted = false;
+let interactive = false;
 
 // Helper.
 function setGlow(self, flag) {
@@ -21,21 +23,25 @@ function setGlow(self, flag) {
   select(self).select('.outer').classed('glow-off', !flag);
 }
 
+function showFullGrid(grid, rowLabels, colLabels, discs) {
+  focusAll();
+  toggleGrid('show', grid, 'fullGrid');
+  fadeMeshes('show', colLabels, d => d);
+  fadeMeshes('show', rowLabels, d => d);
+  fadeMeshes('show', discs, d => d, 0.01);
+
+  autoCorrelation = true;
+  setGlow(select('#auto-corr').node(), autoCorrelation);
+  lowerGrid = true;
+  setGlow(select('#lower-grid').node(), lowerGrid);
+  tilted = false;
+  setGlow(select('#tilt').node(), tilted);
+}
+
 // Listener/handler.
 function fullGrid(grid, rowLabels, colLabels, discs) {
   document.querySelector('#full-grid').addEventListener('click', function () {
-    focusAll();
-    toggleGrid('show', grid, 'fullGrid');
-    fadeMeshes('show', colLabels, d => d);
-    fadeMeshes('show', rowLabels, d => d);
-    fadeMeshes('show', discs, d => d, 0.01);
-
-    autoCorrelation = true;
-    setGlow(select('#auto-corr').node(), autoCorrelation);
-    lowerGrid = true;
-    setGlow(select('#lower-grid').node(), lowerGrid);
-    tilted = false;
-    setGlow(select('#tilt').node(), tilted);
+    showFullGrid(grid, rowLabels, colLabels, discs);
   });
 }
 
@@ -142,6 +148,39 @@ function showQuality(grid, discs, colLabels, rowLabels) {
     });
 }
 
+function setButtonStyle(flag) {
+  select('#big-button-inner').classed('pressed-button', flag);
+  select('#big-button-bulb').classed('pressed-bulb', flag);
+}
+
+function setUi(flag) {
+  // Move and resize button.
+  select('#big-button-wrap').classed('aside', flag);
+  select('#big-button-container').classed('small', flag);
+  select('#big-button-text').classed('shrink', flag);
+
+  // Change text.
+  select('#big-button-text').style('opacity', 0);
+  select('#big-button-text').html(flag ? 'Scroll' : 'Interact');
+  gsap.to('#big-button-text', { opacity: 1, duration: 0.4 });
+
+  // Change pointer events.
+  select('#play, #text-container').classed('interact', flag);
+  select('#play').classed('clear', flag);
+  select('#controls').classed('show', flag);
+}
+
+function toggleInteractivity(grid, rowLabels, colLabels, discs) {
+  document
+    .querySelector('#big-button-inner')
+    .addEventListener('click', function () {
+      interactive = !interactive;
+      setButtonStyle(interactive);
+      setUi(interactive);
+      if (interactive) showFullGrid(grid, rowLabels, colLabels, discs);
+    });
+}
+
 // Main attaching function.
 function addListener(layout, grid, discs, colLabels, rowLabels) {
   fullGrid(grid, rowLabels, colLabels, discs);
@@ -151,6 +190,8 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   toggleLowerGrid(grid, discs, colLabels);
   toggleTilt(colLabels);
   showQuality(grid, discs, colLabels, rowLabels);
+
+  toggleInteractivity(grid, rowLabels, colLabels, discs);
 }
 
 export default addListener;
