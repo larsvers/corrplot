@@ -1,15 +1,12 @@
 #controls {
   position: fixed;
   top: 0;
-  left: -50vw;
   margin: 2rem 1rem;
 
   color: #777;
 
   pointer-events: all;
   z-index: 10;
-
-  transition: left 3s;
 
   select {
     width: 7rem;
@@ -18,8 +15,9 @@
   }
 }
 
-#controls.show {
-  left: 0vw;
+.action {
+  position: relative;
+  left: -50vw;
 }
 
 .button-container {

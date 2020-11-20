@@ -167,7 +167,12 @@ function setUi(flag) {
   // Change pointer events.
   select('#play, #text-container').classed('interact', flag);
   select('#play').classed('clear', flag);
-  select('#controls').classed('show', flag);
+
+  // Toggle side buttons.
+  // eslint-disable-next-line no-unused-expressions
+  flag
+    ? gsap.to('.action', { left: '0vw', stagger: 0.1 })
+    : gsap.to('.action', { left: '-50vw', stagger: 0.1 });
 }
 
 function toggleInteractivity(grid, rowLabels, colLabels, discs) {

@@ -13,6 +13,7 @@ import {
   focusAll,
 } from '../interact/handler';
 import { lowlightGrid } from '../interact/highlight';
+// eslint-disable-next-line import/no-cycle
 import { layout, grid, discs, rowLabels, colLabels } from './init';
 
 gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);

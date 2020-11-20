@@ -16,7 +16,7 @@
     <div id="container">
       <canvas></canvas>
       <div id="controls">
-        <div class="button-container">
+        <div class="button-container action">
           <div class="button" id="full-grid">
             <div class="outer">
               <div class="inner"></div>
@@ -25,9 +25,13 @@
           <div class="button-text">Full grid</div>
         </div>
 
-        <select name="highlight-corr" id="highlight-select"></select>
+        <select
+          name="highlight-corr"
+          class="action"
+          id="highlight-select"
+        ></select>
 
-        <div class="button-container">
+        <div class="button-container action">
           <div class="button" id="reset-colour">
             <div class="outer">
               <div class="inner"></div>
@@ -36,7 +40,7 @@
           <div class="button-text">Reset colour</div>
         </div>
 
-        <div class="button-container">
+        <div class="button-container action">
           <div class="button toggle" id="auto-corr">
             <div class="outer glow-on">
               <div class="inner"></div>
@@ -45,7 +49,7 @@
           <div class="button-text">Auto corrleation</div>
         </div>
 
-        <div class="button-container">
+        <div class="button-container action">
           <div class="button toggle" id="lower-grid">
             <div class="outer glow-on">
               <div class="inner"></div>
@@ -54,7 +58,7 @@
           <div class="button-text">Lower grid</div>
         </div>
 
-        <div class="button-container">
+        <div class="button-container action">
           <div class="button toggle" id="tilt">
             <div class="outer glow-off">
               <div class="inner"></div>
@@ -63,7 +67,7 @@
           <div class="button-text">Tilt</div>
         </div>
 
-        <div class="button-container">
+        <div class="button-container action">
           <div class="button" id="show-quality">
             <div class="outer">
               <div class="inner"></div>
