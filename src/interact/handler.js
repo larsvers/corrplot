@@ -72,13 +72,13 @@ function rotateSprites(sprites, degrees) {
 }
 
 // Tilt funcs.
-function tiltDown(labels) {
+function tilt(labels) {
   const up = { x: -1, y: 1, z: 0 };
   gsap.to(camera.up, up);
   rotateSprites(labels, 0);
 }
 
-function tiltUp(labels) {
+function untilt(labels) {
   const up = { x: 0, y: 1, z: 0 };
   gsap.to(camera.up, up);
   rotateSprites(labels, 90);
@@ -113,8 +113,8 @@ export {
   highlightCells,
   fadeMeshes,
   toggleGrid,
-  tiltDown,
-  tiltUp,
+  tilt,
+  untilt,
   rotateSprites,
   focusQuality,
   focusAll,

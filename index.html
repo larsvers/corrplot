@@ -79,16 +79,61 @@
         </p>
         <div id="play">
           <div id="controls">
-            <button id="full-grid">Show full grid</button>
+            <div class="button-container">
+              <div class="button" id="full-grid">
+                <div class="outer">
+                  <div class="inner"></div>
+                </div>
+              </div>
+              <div class="button-text">Full grid</div>
+            </div>
+
             <select name="highlight-corr" id="highlight-select"></select>
-            <button id="reset-grid-colour">Reset grid colour</button>
-            <button id="remove-auto-corr">Remove auto-correlation</button>
-            <button id="add-auto-corr">Add auto-correlation</button>
-            <button id="remove-lower-grid">Remove lower half grid</button>
-            <button id="tilt-grid">Tilt grid</button>
-            <button id="tilt-grid-back">Tilt grid back up</button>
-            <button id="add-lower-grid">Add lower half grid</button>
-            <button id="show-quality">Show quality</button>
+
+            <div class="button-container">
+              <div class="button" id="reset-colour">
+                <div class="outer">
+                  <div class="inner"></div>
+                </div>
+              </div>
+              <div class="button-text">Reset colour</div>
+            </div>
+
+            <div class="button-container">
+              <div class="button toggle" id="auto-corr">
+                <div class="outer glow-on">
+                  <div class="inner"></div>
+                </div>
+              </div>
+              <div class="button-text">Auto corrleation</div>
+            </div>
+
+            <div class="button-container">
+              <div class="button toggle" id="lower-grid">
+                <div class="outer glow-on">
+                  <div class="inner"></div>
+                </div>
+              </div>
+              <div class="button-text">Lower grid</div>
+            </div>
+
+            <div class="button-container">
+              <div class="button toggle" id="tilt">
+                <div class="outer glow-off">
+                  <div class="inner"></div>
+                </div>
+              </div>
+              <div class="button-text">Tilt</div>
+            </div>
+
+            <div class="button-container">
+              <div class="button" id="show-quality">
+                <div class="outer">
+                  <div class="inner"></div>
+                </div>
+              </div>
+              <div class="button-text">Focus quality</div>
+            </div>
           </div>
         </div>
       </div>

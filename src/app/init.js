@@ -87,7 +87,6 @@ function ready(data) {
 function init() {
   // Just load the data and call the main func.
   csv('../../data/corr.csv', autoType).then(ready);
-  // window.addEventListener('resize', update);
 }
 
 export default init;

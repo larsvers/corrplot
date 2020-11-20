@@ -1,0 +1,73 @@
+#controls {
+  z-index: 10;
+  font-family: 'DB Sans';
+  color: #777;
+
+  select {
+    width: 7rem;
+    margin: 0 1rem;
+    color: #777;
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  margin: 1rem;
+
+  font-size: 0.7em;
+}
+
+.button-text {
+  margin: 0 1em;
+  width: 4rem;
+}
+
+// Container needs width/height and position.
+.button {
+  width: 40px;
+  height: 20px;
+  position: relative;
+}
+
+// Button specific css:
+.outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  border: 1px solid #ccc;
+  box-shadow: 0 0px 1px 1px #ccc;
+
+  transition: box-shadow 0.5s;
+}
+
+.inner {
+  width: 90%;
+  height: 90%;
+  position: relative;
+
+  background: linear-gradient(180deg, #eee, #fcfcfc);
+  box-shadow: 0 2px 3px 1px #ccc;
+
+  transition: box-shadow 0.2s;
+}
+
+// Interaction.
+.outer:active .inner {
+  box-shadow: 0 0px 0px 0px #ccc;
+}
+
+.glow-off {
+  box-shadow: 0 0px 3px 1px #fdd17f;
+}
+
+.glow-on {
+  box-shadow: 0 0px 3px 1px #79e787;
+}
