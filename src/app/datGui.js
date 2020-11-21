@@ -8,14 +8,14 @@ const params = {
   pointInt: pointLight.intensity,
 };
 
-const gui = new dat.GUI();
+// const gui = new dat.GUI();
 
-gui.addColor(params, 'color').onChange(v => box.material.color.set(v));
-gui
-  .add(params, 'ambientInt', 0, 1, 0.1)
-  .onChange(v => (ambientLight.intensity = +v));
-gui
-  .add(params, 'pointInt', 0, 1, 0.1)
-  .onChange(v => (pointLight.intensity = +v));
+// gui.addColor(params, 'color').onChange(v => box.material.color.set(v));
+// gui
+//   .add(params, 'ambientInt', 0, 1, 0.1)
+//   .onChange(v => (ambientLight.intensity = +v));
+// gui
+//   .add(params, 'pointInt', 0, 1, 0.1)
+//   .onChange(v => (pointLight.intensity = +v));
 
 export default params;

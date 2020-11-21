@@ -7,7 +7,7 @@ import {
 } from 'three/build/three.module';
 
 function getBox() {
-  const geo = new BoxBufferGeometry(1000, 1000, 400);
+  const geo = new BoxBufferGeometry(10000, 10000, 10000);
   const mat = new MeshStandardMaterial({
     color: '#f7f7f7',
     side: DoubleSide,

@@ -9,9 +9,12 @@
   z-index: 10;
 
   select {
-    width: 7rem;
+    width: 42px;
     margin: 0 1rem;
     color: #777;
+    border-radius: 0;
+    border: 1px solid #ccc;
+    box-shadow: 0 0px 1px 1px #ccc;
   }
 }
 

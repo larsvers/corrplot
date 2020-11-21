@@ -16,24 +16,4 @@ canvas {
   height: 100%;
   position: fixed;
   top: 0;
-  background-color: aliceblue;
-}
-
-// Text
-
-#text-container {
-  position: absolute;
-  top: 0;
-
-  p {
-    margin: 50vh 25vw;
-    padding: 2rem 4rem;
-    backdrop-filter: blur(2px);
-    background: rgba(255, 255, 255, 0.8);
-    box-shadow: 2px 2px 10px #ccc;
-  }
-
-  p:first-child {
-    margin-top: 90vh;
-  }
 }
