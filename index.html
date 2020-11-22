@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>corrplot</title>
+    <title>Correlat3</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -81,73 +81,140 @@
         <div id="header">
           <h1>Pruned Correlations</h1>
           <h3>Cutting to the essence of wine property relations</h3>
+          <div class="scroll-arrow">
+            ↓<br /><span class="lowlight">scroll</span>
+          </div>
         </div>
-        <p id="section-00">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-01">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-02">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-03">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-04">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-05">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-06">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-07">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-08">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-09">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
-        <p id="section-10">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit, quasi
-          aspernatur exercitationem aliquam consequuntur nulla veritatis amet
-          perspiciatis totam ipsum a nihil cumque. Fugiat, dicta nam saepe eum
-          doloremque dolorem?
-        </p>
+        <div id="intro">
+          <p>
+            Data has the tendency to come in rows for observations and columns
+            for the variables, measures, metrics or whatever you might want to
+            call it. Whenever I meet a new dataset, I am ambling along its
+            columns to get an understanding of it &mdash; to profile it. Quite
+            literally, I move from column to column and dedicate a good moment
+            to get to know a little &mdash; typically running frequencies,
+            calculate normal values and check for missings.
+          </p>
+          <p>
+            While this first approach is more of a personal conversation under
+            four eyes I try to get more social in the second approach:
+            understanding relations between variables. With numerical data one
+            would typically bring a correlation matrix along, which gives us an
+            overview of associations across all numeric variables in a dataset.
+          </p>
+          <p>
+            Recently, I've done so analysing 1,600 wines and their
+            physiochemical properties, making up a wine's liquid composition, in
+            order to build a model aimed to predict a wine's quality. Properties
+            like Alcohol, sugars, chlorides (salt), pH Value, acids and more.
+          </p>
+          <p id="section-0">
+            In fact, there's a whole little visual story about these efforts
+            over here, and originally this thingy here was supposed to be part
+            of that story, but it didn't quite fit, so it gets its very own
+            little stage. <br /><br />Be that as may, the wine quality model we
+            build over there is a Logistic Regression &mdash; a general linear
+            model, which comes with the benefit of being relatively simple to
+            explain becasue all it does is modelling correlations between
+            &mdash; in our case &mdash; numeric variables. To get an inital
+            overview, one would usually use a correlation matrix like so:
+          </p>
+        </div>
+        <div id="main">
+          <p id="section-1">
+            I like correlation matrixes. They do the job. Seeing a correlation
+            matrix for the first time, you might have to orient yourself a
+            little, but once that's done you quickly understand how to read it.
+            For the sake of completeness: all your variables are in the rows and
+            the columns and the circles encode the correlation magnitude with
+            their size and possibly their colour lightness and the correlation
+            direction with hue. <br /><br />This is all you need to know to
+            efficiently look up each correlation of interest like for example
+            the correlation between a wine's pH values and Citric Acid,
+          </p>
+          <p id="section-empty">
+            which seems to be negative, indicated by the orange tint, and quite
+            notable &mdash; in this case it's -0.54.
+          </p>
+          <p id="section-2">
+            Or between alcohol and density, also negative, telling us that the
+            higher the alcohol → the lower the density.
+          </p>
+          <p id="section-3">
+            Or between the all important wine quality and alcohol, which &mdash;
+            maybe unsurpsingly &mdash; is positive. The higher the alcohol → the
+            higher the quality (we can sense the limits of correlations in
+            reality here as there's probably a tipping point a simple
+            correlation won't capture).
+          </p>
+          <p id="section-4">
+            As nice and efficient as this all is, it carries some slack, we can
+            prune away; like for example the diagonal of auto-correlations. It
+            is sort of pretty obvious that each variable is perfectly positively
+            correlated with itself. So off we go.
+          </p>
+          <p id="section-empty">
+            There are
+            <a
+              href="https://www.r-graph-gallery.com/199-correlation-matrix-with-ggally.html"
+              target="_blank"
+              >great</a
+            >
+            <a
+              href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html"
+              target="_blank"
+              >visualisation</a
+            >
+            <a
+              href="https://seaborn.pydata.org/examples/many_pairwise_correlations.html"
+              target="_blank"
+              >packages</a
+            >
+            out there some of which use this space to show for example the
+            density distribution of that variable, but to keep it minimal we're
+            just removing it here.
+          </p>
+          <p id="section-5">
+            But there's more to cut. In fact, more than half of the matrix can
+            go, as the bottom right grid is just a reflection of the upper left
+            grid.
+          </p>
+          <p id="section-6">
+            This is it, I guess. To get a full overview, we can't really cut
+            away anything else. We can tilt it into a correlation pyramid for
+            different aesthetics,
+          </p>
+          <p id="section-7">
+            ...but that's a matter of taste. <br /><br />Now, the reason I
+            started climbing down into the correlation matrix basement to start
+            with, was a faint call from the 3rd dimension. Whenever I look at
+            correlation matrixes, my inner eye doesn't only see circles encoding
+            the correlation strength and direction but bars, or cylinders
+            pointing up or down. We can't see them as we're looking straight
+            down onto its flat survace, but someone needed to free them I
+            thought. It turns out the 3rd dimension isn't all too helpful when
+            you have a full matrix &mdash; as you can't see the tree for the
+            forest, as it were. Too busy. <br /><br />BUT our particular
+            interest in the data (full story over here, I won't mention it
+            again, thank you very much) is on correlation of all variables with
+            just a single variable: the wine quality! <br /><br />So, focusising
+            in on quality...
+          </p>
+          <p id="section-8">
+            we can now add some additional encodings to the circles' hue and
+            lightness, by turnining the circles into cylinders...
+          </p>
+          <p id="section-empty">
+            Nice! Redundant encoidings are good for efficiency they tought us in
+            the visual data school, and here we have some possibly beneficial
+            redundancy. <br /><br />Now it's your turn to take this for a spin.
+            Just continue to scroll and wait for the big white misplaced
+            <a href="https://en.wikipedia.org/wiki/Dieter_Rams">Dieter Rams</a>
+            inspired button (totally unrelated &mdash; this has nothing to do
+            with anything) to interact with our little friend, the correlation
+            matrix in 3 dimensions.
+          </p>
+        </div>
         <div id="play">
           <div id="big-button-wrap">
             <div id="big-button-container">

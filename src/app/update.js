@@ -21,100 +21,85 @@ gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 function setScroll() {
   ScrollTrigger.create({
     animation: tweenZoom,
-    trigger: '#section-00',
-    start: 'center center',
-    end: 'bottom center',
+    trigger: '#section-0',
+    start: 'bottom center',
+    endTrigger: '#section-1',
+    end: 'top bottom',
     id: 'zoomIn',
     scrub: true,
+    // markers: true,
   });
 
   ScrollTrigger.create({
-    trigger: '#section-01',
-    start: 'center center',
-    end: 'bottom center',
-    id: 'highlight',
+    trigger: '#section-1',
+    start: 'bottom 25%',
+    end: 'bottom top',
+    id: 'highlight-1',
     // markers: true,
     onEnter: () => highlightCells(layout, grid, 'pH | citric acid'),
     onLeaveBack: () => lowlightGrid(grid),
   });
 
   ScrollTrigger.create({
-    trigger: '#section-02',
-    start: 'center center',
-    end: 'bottom center',
-    id: 'highlight',
+    trigger: '#section-2',
+    start: 'bottom 25%',
+    end: 'bottom top',
+    id: 'highlight-2',
     // markers: true,
     onEnter: () => highlightCells(layout, grid, 'alcohol | density'),
     onLeaveBack: () => highlightCells(layout, grid, 'pH | citric acid'),
   });
 
   ScrollTrigger.create({
-    trigger: '#section-03',
-    start: 'center center',
-    end: 'bottom center',
-    id: 'highlight',
+    trigger: '#section-3',
+    start: 'bottom 25%',
+    end: 'bottom top',
+    id: 'highlight-3',
     // markers: true,
     onEnter: () => highlightCells(layout, grid, 'quality | alcohol'),
     onLeaveBack: () => highlightCells(layout, grid, 'alcohol | density'),
   });
 
   ScrollTrigger.create({
-    trigger: '#section-04',
-    start: 'center center',
-    end: 'bottom center',
-    id: 'highlight',
-    // markers: true,
-    onEnter: () => lowlightGrid(grid),
-    onLeaveBack: () => highlightCells(layout, grid, 'quality | alcohol'),
-  });
-
-  ScrollTrigger.create({
-    trigger: '#section-05',
-    start: 'center center',
-    end: 'bottom center',
+    trigger: '#section-4',
+    start: 'bottom 25%',
+    end: 'bottom top',
     id: 'autocorrelation',
     // markers: true,
-    onEnter: () => fadeMeshes('hide', discs, d => d.userData.value === 1),
+    onEnter() {
+      lowlightGrid(grid);
+      fadeMeshes('hide', discs, d => d.userData.value === 1);
+    },
     onLeaveBack: () => fadeMeshes('show', discs, d => d.userData.value === 1),
   });
 
   ScrollTrigger.create({
-    trigger: '#section-06',
-    start: 'center center',
-    end: 'bottom center',
+    trigger: '#section-5',
+    start: 'bottom 25%',
+    end: 'bottom top',
     id: 'lowerFade',
     // markers: true,
-    onEnter: () =>
+    onEnter() {
       fadeMeshes(
         'hide',
         discs,
         d => d.userData.index[1] <= d.userData.index[0],
         0.01
-      ),
-    onLeaveBack: () =>
-      fadeMeshes('show', discs, d => d.userData.value !== 1, 0.01),
-  });
-
-  ScrollTrigger.create({
-    trigger: '#section-07',
-    start: 'center center',
-    end: 'bottom center',
-    id: 'lowerRemove',
-    // markers: true,
-    onEnter() {
+      );
       toggleGrid('hide', grid, 'lowerGrid');
       fadeMeshes('hide', colLabels, d => d.userData.col === 'quality');
     },
     onLeaveBack() {
+      fadeMeshes('show', discs, d => d.userData.value !== 1, 0.01);
       toggleGrid('show', grid, 'fullGrid');
       fadeMeshes('show', colLabels, d => d.userData.col === 'quality');
     },
   });
 
   ScrollTrigger.create({
-    trigger: '#section-08',
-    start: 'center center',
-    end: 'bottom center',
+    trigger: '#section-6',
+    start: 'bottom 25%',
+    end: 'bottom top',
     id: 'tilt',
     // markers: true,
     onEnter() {
@@ -128,9 +113,9 @@ function setScroll() {
   });
 
   ScrollTrigger.create({
-    trigger: '#section-09',
-    start: 'center center',
-    end: 'bottom center',
+    trigger: '#section-7',
+    start: 'bottom 25%',
+    end: 'bottom top',
     id: 'lowerRemove',
     // markers: true,
     onEnter() {
@@ -151,9 +136,9 @@ function setScroll() {
   });
 
   ScrollTrigger.create({
-    trigger: '#section-10',
-    start: 'center center',
-    end: 'bottom center',
+    trigger: '#section-8',
+    start: 'bottom 25%',
+    end: 'bottom top',
     id: 'qualityFocus',
     // markers: true,
     onEnter: () => focusQuality(colLabels),
