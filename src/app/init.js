@@ -4,6 +4,8 @@
 /* eslint-disable no-param-reassign */
 import { csv } from 'd3-fetch/src/index';
 import { autoType } from 'd3-dsv/src/index';
+import { select } from 'd3-selection/src';
+import 'd3-transition/src';
 
 import animate from './animate';
 import scene from '../core/scene';
@@ -87,6 +89,9 @@ function ready(data) {
 function init() {
   // Just load the data and call the main func.
   csv('../../data/corr.csv', autoType).then(ready);
+  window.addEventListener('load', () => {
+    select('#loader').transition().style('opacity', 0).remove();
+  });
 }
 
 export default init;

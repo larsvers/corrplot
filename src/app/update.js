@@ -20,9 +20,16 @@ gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
 function setScroll() {
   ScrollTrigger.create({
+    trigger: '#intro',
+    start: 'top bottom',
+    // markers: true,
+    onEnter: () => ScrollTrigger.refresh(),
+  });
+
+  ScrollTrigger.create({
     animation: tweenZoom,
     trigger: '#section-0',
-    start: 'bottom center',
+    start: 'bottom 25%',
     endTrigger: '#section-1',
     end: 'top bottom',
     id: 'zoomIn',
