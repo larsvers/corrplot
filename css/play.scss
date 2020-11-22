@@ -49,7 +49,11 @@
 
 #big-button-wrap.aside {
   top: 92%;
-  left: 92%;
+  left: 88%;
+
+  @media #{$tablet-up} {
+    left: 92%;
+  }
 }
 
 #big-button-container.small {

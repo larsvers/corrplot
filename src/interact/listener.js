@@ -174,7 +174,7 @@ function setUi(flag) {
   // eslint-disable-next-line no-unused-expressions
   flag
     ? gsap.to('.action', { left: '0vw', stagger: 0.1 })
-    : gsap.to('.action', { left: '-50vw', stagger: 0.1 });
+    : gsap.to('.action', { left: '-100vw', stagger: 0.1 });
 }
 
 function toggleInteractivity(grid, rowLabels, colLabels, discs) {

@@ -3,10 +3,18 @@
   top: 0;
   margin: 2rem 1rem;
 
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 40px);
+
   color: #777;
 
   pointer-events: all;
   z-index: 10;
+
+  @media #{$tablet-up} {
+    display: block;
+  }
 
   select {
     width: 42px;
@@ -20,7 +28,7 @@
 
 .action {
   position: relative;
-  left: -50vw;
+  left: -100vw;
 }
 
 .button-container {

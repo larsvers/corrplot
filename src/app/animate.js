@@ -1,9 +1,11 @@
 /* eslint-disable import/no-duplicates */
 import { setRendererSize } from './utils';
+import { updateTweenZoom } from '../interact/handler';
 import renderer from '../core/renderer';
 import scene from '../core/scene';
 import camera from '../core/camera';
 import controls from '../core/controls';
+import state from '../core/state';
 
 // prettier-ignore
 import { getCameraParams } from '../core/camera'
@@ -22,6 +24,10 @@ function animate(time) {
     camera.top = c.top;
     camera.bottom = c.bottom;
     camera.updateProjectionMatrix();
+
+    // Get screensize and update dependent funcs (just one so far).
+    state.screen = canvas.width < 800 ? 'mobile' : 'desktop';
+    updateTweenZoom();
   }
 
   // Update controls and render.

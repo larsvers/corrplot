@@ -9,9 +9,12 @@ function onUpdate() {
 }
 
 // Zoom.
-const tweenZoom = gsap
-  .timeline({ onUpdate })
-  .fromTo(camera, { zoom: 0 }, { zoom: 1 });
+let tweenZoom;
+function updateTweenZoom() {
+  tweenZoom = gsap
+    .timeline({ onUpdate })
+    .fromTo(camera, { zoom: 0 }, { zoom: state.zoom.norm[state.screen] });
+}
 
 // Highlight.
 function highlightCells(layout, grid, string) {
@@ -87,7 +90,7 @@ function untilt(labels) {
 // Focus funcs.
 function focusQuality(labels) {
   // Camera move/zoom
-  const zoom = { zoom: 1.5 };
+  const zoom = { zoom: state.zoom.in[state.screen] };
   const to = { x: 50, y: -100, z: 20 };
   const up = { x: 0, y: 0, z: 1 };
 
@@ -103,13 +106,14 @@ function focusQuality(labels) {
 function focusAll() {
   gsap
     .timeline({ onUpdate })
-    .to(camera, { zoom: 1 }, 0)
+    .to(camera, { zoom: state.zoom.norm[state.screen] }, 0)
     .to(camera.position, { x: 0, y: 0, z: 100 }, 0)
     .to(camera.up, { x: 0, y: 1, z: 0 }, 0);
 }
 
 export {
   tweenZoom,
+  updateTweenZoom,
   highlightCells,
   fadeMeshes,
   toggleGrid,
