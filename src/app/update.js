@@ -88,11 +88,13 @@ function setScroll() {
       );
       toggleGrid('hide', grid, 'lowerGrid');
       fadeMeshes('hide', colLabels, d => d.userData.col === 'quality');
+      fadeMeshes('hide', rowLabels, d => d.userData.row === 'fixed acidity');
     },
     onLeaveBack() {
       fadeMeshes('show', discs, d => d.userData.value !== 1, 0.01);
       toggleGrid('show', grid, 'fullGrid');
       fadeMeshes('show', colLabels, d => d.userData.col === 'quality');
+      fadeMeshes('show', rowLabels, d => d);
     },
   });
 

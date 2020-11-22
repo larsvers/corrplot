@@ -46,7 +46,7 @@
   p {
     margin: 100vh 25vw;
     padding: 2rem 4rem;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(8px);
     background: rgba(255, 255, 255, 0.8);
     box-shadow: 2px 2px 10px #ccc;
   }
@@ -54,6 +54,14 @@
   p:first-child {
     margin-top: 90vh;
   }
+}
+
+span.orange {
+  color: #f18e75;
+}
+
+span.blue {
+  color: #62a9eb;
 }
 
 .scroll-arrow {

@@ -75,12 +75,13 @@ function toggleAutoCorrelation(discs) {
   });
 }
 
-function toggleLowerGrid(grid, discs, colLabels) {
+function toggleLowerGrid(grid, discs, rowLabels, colLabels) {
   document.querySelector('#lower-grid').addEventListener('click', function () {
     lowerGrid = !lowerGrid;
     if (lowerGrid) {
       toggleGrid('show', grid, 'fullGrid');
       fadeMeshes('show', colLabels, d => d.userData.col === 'quality');
+      fadeMeshes('show', rowLabels, d => d);
       fadeMeshes('show', discs, d => d.userData.value === 1);
       fadeMeshes(
         'show',
@@ -95,6 +96,7 @@ function toggleLowerGrid(grid, discs, colLabels) {
     } else {
       toggleGrid('hide', grid, 'lowerGrid');
       fadeMeshes('hide', colLabels, d => d.userData.col === 'quality');
+      fadeMeshes('hide', rowLabels, d => d.userData.row === 'fixed acidity');
       fadeMeshes('hide', discs, d => d.userData.value === 1);
       fadeMeshes(
         'hide',
@@ -192,7 +194,7 @@ function addListener(layout, grid, discs, colLabels, rowLabels) {
   highlightSelect(layout, grid);
   resetGridColour(grid);
   toggleAutoCorrelation(discs);
-  toggleLowerGrid(grid, discs, colLabels);
+  toggleLowerGrid(grid, discs, rowLabels, colLabels);
   toggleTilt(colLabels);
   showQuality(grid, discs, colLabels, rowLabels);
 

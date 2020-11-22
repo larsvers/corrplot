@@ -87,54 +87,66 @@
         </div>
         <div id="intro">
           <p>
-            Data has the tendency to come in rows for observations and columns
-            for the variables, measures, metrics or whatever you might want to
-            call it. Whenever I meet a new dataset, I am ambling along its
-            columns to get an understanding of it &mdash; to profile it. Quite
-            literally, I move from column to column and dedicate a good moment
-            to get to know a little &mdash; typically running frequencies,
-            calculate normal values and check for missings.
+            Data has a tendency to come in rows for observations and columns for
+            variables, measures, metrics or whatever you might call it. Whenever
+            I meet a new dataset, I am ambling along its columns to establish a
+            profile for each of them. I move from column to column and spend a
+            good moment to get to know it a little better &mdash; typically
+            running frequencies, calculate normal values and check for missings.
           </p>
           <p>
-            While this first approach is more of a personal conversation under
-            four eyes I try to get more social in the second approach:
+            While this first meeting is more of a personal conversation under
+            four eyes I try to get more social in the second gathering:
             understanding relations between variables. With numerical data one
             would typically bring a correlation matrix along, which gives us an
-            overview of associations across all numeric variables in a dataset.
+            overview of associations across all variables in a dataset.
           </p>
           <p>
             Recently, I've done so analysing 1,600 wines and their
-            physiochemical properties, making up a wine's liquid composition, in
-            order to build a model aimed to predict a wine's quality. Properties
-            like Alcohol, sugars, chlorides (salt), pH Value, acids and more.
+            physiochemical properties &mdash; alcohol, sugars, chlorides (salt),
+            pH Value, acids, etc. &mdash; in order to build a simple model aimed
+            to predict a wine's quality.
           </p>
           <p id="section-0">
             In fact, there's a whole little visual story about these efforts
             over here, and originally this thingy here was supposed to be part
             of that story, but it didn't quite fit, so it gets its very own
-            little stage. <br /><br />Be that as may, the wine quality model we
-            build over there is a Logistic Regression &mdash; a general linear
-            model, which comes with the benefit of being relatively simple to
-            explain becasue all it does is modelling correlations between
-            &mdash; in our case &mdash; numeric variables. To get an inital
-            overview, one would usually use a correlation matrix like so:
+            little stage.
+          </p>
+          <p>
+            Be that as it may, the wine quality model we built over there is a
+            <a
+              href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3936971"
+              target="_blank"
+              >Logistic Regression</a
+            >
+            &mdash; a general linear model, which comes with the benefit of
+            being relatively simple to explain because what it does in essence
+            is modelling correlations between &mdash; in our case &mdash;
+            numeric variables. To get an inital overview of correlations in your
+            dataset, you could get a correlation matrix that would look
+            something like this:
           </p>
         </div>
         <div id="main">
           <p id="section-1">
-            I like correlation matrixes. They do the job. Seeing a correlation
-            matrix for the first time, you might have to orient yourself a
-            little, but once that's done you quickly understand how to read it.
-            For the sake of completeness: all your variables are in the rows and
-            the columns and the circles encode the correlation magnitude with
-            their size and possibly their colour lightness and the correlation
-            direction with hue. <br /><br />This is all you need to know to
-            efficiently look up each correlation of interest like for example
-            the correlation between a wine's pH values and Citric Acid,
+            Correlation matrices are helpful and they do the job. Seeing a
+            correlation matrix for the first time, you might have to get your
+            bearings a little, but once that's done it's a quick and efficient
+            read:
+            <br /><br />all your variables are in the rows
+            <strong>AND</strong> in the columns and the circles encode the
+            correlation strength with size and lightness as well as the
+            correlation direction with the circle's hue.
+            <span class="orange">Orange</span> for negative and
+            <span class="blue">blue</span> for positive correlations in this
+            case. <br /><br />This is all you need to know to efficiently look
+            up each correlation of interest like for example the correlation
+            between a wine's pH values and Citric Acid,
           </p>
           <p id="section-empty">
-            which seems to be negative, indicated by the orange tint, and quite
-            notable &mdash; in this case it's -0.54.
+            which &mdash; given the orange tint &mdash; seems to be negative,
+            and of significant size with -0.54 in this case.
           </p>
           <p id="section-2">
             Or between alcohol and density, also negative, telling us that the
@@ -151,7 +163,7 @@
             As nice and efficient as this all is, it carries some slack, we can
             prune away; like for example the diagonal of auto-correlations. It
             is sort of pretty obvious that each variable is perfectly positively
-            correlated with itself. So off we go.
+            correlated with itself. So let's chop it off..
           </p>
           <p id="section-empty">
             There are
@@ -170,14 +182,13 @@
               target="_blank"
               >packages</a
             >
-            out there some of which use this space to show for example the
+            out there, some of which use this space to show for example the
             density distribution of that variable, but to keep it minimal we're
             just removing it here.
           </p>
           <p id="section-5">
             But there's more to cut. In fact, more than half of the matrix can
-            go, as the bottom right grid is just a reflection of the upper left
-            grid.
+            go, as the bottom right is just a reflection of the upper left.
           </p>
           <p id="section-6">
             This is it, I guess. To get a full overview, we can't really cut
@@ -186,33 +197,32 @@
           </p>
           <p id="section-7">
             ...but that's a matter of taste. <br /><br />Now, the reason I
-            started climbing down into the correlation matrix basement to start
-            with, was a faint call from the 3rd dimension. Whenever I look at
-            correlation matrixes, my inner eye doesn't only see circles encoding
-            the correlation strength and direction but bars, or cylinders
-            pointing up or down. We can't see them as we're looking straight
-            down onto its flat survace, but someone needed to free them I
-            thought. It turns out the 3rd dimension isn't all too helpful when
-            you have a full matrix &mdash; as you can't see the tree for the
-            forest, as it were. Too busy. <br /><br />BUT our particular
+            started climbing down the correlation matrix basement to start with,
+            was a faint call from the 3rd dimension. Whenever I look at
+            correlation matrices, my inner eye doesn't only see circles encoding
+            correlation strength and direction but bars, or cylinders pointing
+            up or down. We can't see them as we're looking straight down onto
+            its flat surface, but I thought they might be worth to be excavated.
+            <br /><br />It turns out the 3rd dimension isn't all too helpful
+            when you have a full matrix &mdash; as you can't see the tree for
+            the forest, as it were. Too busy. <br /><br />BUT our particular
             interest in the data (full story over here, I won't mention it
             again, thank you very much) is on correlation of all variables with
-            just a single variable: the wine quality! <br /><br />So, focusising
+            just a single variable: the wine quality! <br /><br />So, focussing
             in on quality...
           </p>
           <p id="section-8">
-            we can now add some additional encodings to the circles' hue and
-            lightness, by turnining the circles into cylinders...
+            we can now add a length encoding to the circles' hue and lightness,
+            by turnining the circles into cylinders...
           </p>
           <p id="section-empty">
-            Nice! Redundant encoidings are good for efficiency they tought us in
-            the visual data school, and here we have some possibly beneficial
+            Nice! Redundant encodings are good for efficiency they tought us in
+            visual data school, and here we have some possibly beneficial
             redundancy. <br /><br />Now it's your turn to take this for a spin.
-            Just continue to scroll and wait for the big white misplaced
+            Just continue to scroll and wait for the big white
             <a href="https://en.wikipedia.org/wiki/Dieter_Rams">Dieter Rams</a>
-            inspired button (totally unrelated &mdash; this has nothing to do
-            with anything) to interact with our little friend, the correlation
-            matrix in 3 dimensions.
+            inspired button (totally unrelated &mdash; has nothing to do with
+            anything) to interact with that matrix in 3 dimensions....
           </p>
         </div>
         <div id="play">
