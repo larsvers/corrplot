@@ -93,14 +93,13 @@
           <p>
             Data has a tendency to come in rows for observations and columns for
             variables, measures, metrics or whatever you might call it. Whenever
-            I meet a new dataset, I am ambling along its columns to establish a
-            profile for each of them. I move from column to column and spend a
-            good moment to get to know it a little better &mdash; typically
-            running frequencies, calculate normal values and check for missings.
+            meet a new dataset, it seems a good idea to amble along its columns
+            in order to establish a data profile &mdash; running frequencies,
+            calculating normal values and checking for missings.
           </p>
           <p>
             While this first meeting is more of a personal conversation under
-            four eyes I try to get more social in the second gathering:
+            four eyes I tend to get more social in a second gathering:
             understanding relations between variables. With numerical data one
             would typically bring a correlation matrix along, which gives us an
             overview of associations across all variables in a dataset.
@@ -112,9 +111,9 @@
             to predict a wine's quality.
           </p>
           <p id="section-0">
-            In fact, there's a whole little visual story about these efforts
-            over here, and originally this thingy here was supposed to be part
-            of that story, but it didn't quite fit, so it gets its very own
+            There's a whole little visual story about these efforts (and its
+            issues) over here, and originally this thingy here was supposed to
+            be part of that story, but it didn't quite fit, so it gets its own
             little stage.
           </p>
           <p>
@@ -126,26 +125,22 @@
             >
             &mdash; a general linear model, which comes with the benefit of
             being relatively simple to explain because what it does in essence
-            is modelling correlations between &mdash; in our case &mdash;
-            numeric variables. To get an inital overview of correlations in your
-            dataset, you could get a correlation matrix that would look
+            is modelling correlations between our numeric variables. Typically
+            you'd get an inital overviewin a correlation matrix that might look
             something like this:
           </p>
         </div>
         <div id="main">
           <p id="section-1">
-            Correlation matrices are helpful and they do the job. Seeing a
-            correlation matrix for the first time, you might have to get your
-            bearings a little, but once that's done it's a quick and efficient
-            read:
-            <br /><br />all your variables are in the rows
+            Correlation matrices aren't very complex and support a quick and
+            efficient read. All your variables are in the rows
             <strong>AND</strong> in the columns and the circles encode the
             correlation strength with size and lightness as well as the
             correlation direction with the circle's hue.
             <span class="orange">Orange</span> for negative and
             <span class="blue">blue</span> for positive correlations in this
-            case. <br /><br />This is all you need to know to efficiently look
-            up each correlation of interest like for example the correlation
+            case. <br /><br />This is all there is to know to efficiently look
+            up any correlation of interest like for example the correlation
             between a wine's pH values and Citric Acid,
           </p>
           <p id="section-empty">
@@ -157,8 +152,8 @@
             higher the alcohol → the lower the density.
           </p>
           <p id="section-3">
-            Or between the all important wine quality and alcohol, which &mdash;
-            maybe unsurpsingly &mdash; is positive. The higher the alcohol → the
+            Or between the crucial wine quality and alcohol, which &mdash; maybe
+            unsurpsingly &mdash; is positive. The higher the alcohol → the
             higher the quality (we can sense the limits of correlations in
             reality here as there's probably a tipping point a simple
             correlation won't capture).
@@ -223,10 +218,8 @@
             Nice! Redundant encodings are good for efficiency they tought us in
             visual data school, and here we have some possibly beneficial
             redundancy. <br /><br />Now it's your turn to take this for a spin.
-            Just continue to scroll and wait for the big white
-            <a href="https://en.wikipedia.org/wiki/Dieter_Rams">Dieter Rams</a>
-            inspired button (totally unrelated &mdash; has nothing to do with
-            anything) to interact with that matrix in 3 dimensions....
+            Just continue to scroll and wait for the big white button to
+            interact with that matrix in 3 dimensions....
           </p>
         </div>
         <div id="play">
