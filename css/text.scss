@@ -115,3 +115,25 @@ span.blue {
     transform: translateY(-1rem);
   }
 }
+
+span.image {
+  display: inline-block;
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+span.small-image {
+  height: 1em;
+  position: relative;
+  display: inline-block;
+
+  img.full {
+    height: 100%;
+  }
+  img.small {
+    height: 70%;
+  }
+}

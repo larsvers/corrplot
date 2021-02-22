@@ -49,7 +49,7 @@ function setScroll() {
 
   ScrollTrigger.create({
     trigger: '#section-2',
-    start: 'bottom 25%',
+    start: 'bottom 90%',
     end: 'bottom top',
     id: 'highlight-2',
     // markers: true,
@@ -59,7 +59,7 @@ function setScroll() {
 
   ScrollTrigger.create({
     trigger: '#section-3',
-    start: 'bottom 25%',
+    start: 'bottom 90%',
     end: 'bottom top',
     id: 'highlight-3',
     // markers: true,

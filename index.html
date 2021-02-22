@@ -92,29 +92,28 @@
         <div id="intro">
           <p>
             Data has a tendency to come in rows for observations and columns for
-            variables, measures, metrics or whatever you might call it. Whenever
-            meet a new dataset, it seems a good idea to amble along its columns
-            in order to establish a data profile &mdash; running frequencies,
-            calculating normal values and checking for missings.
+            variables. Whenever you meet a new dataset, it seems a good idea to
+            stroll along its columns in order to establish a data profile
+            &mdash; running frequencies, calculating normal values and checking
+            for missings.
           </p>
           <p>
-            While this first meeting is more of a personal conversation under
-            four eyes I tend to get more social in a second gathering:
-            understanding relations between variables. With numerical data one
-            would typically bring a correlation matrix along, which gives us an
+            While this first meeting is more of a personal conversation with
+            each column the second meeting tends to get more social:
+            understanding relations between variables. With numerical data you
+            would often bring a correlation matrix along, which can give you an
             overview of associations across all variables in a dataset.
           </p>
           <p>
             Recently, I've done so analysing 1,600 wines and their
-            physiochemical properties &mdash; alcohol, sugars, chlorides (salt),
-            pH Value, acids, etc. &mdash; in order to build a simple model aimed
-            to predict a wine's quality.
+            physiochemical properties &mdash; alcohol, sugars, acids, etc.
+            &mdash; in order to build a simple model aimed to predict a wine's
+            quality.
           </p>
           <p id="section-0">
-            There's a whole little visual story about these efforts (and its
-            issues) over here, and originally this thingy here was supposed to
-            be part of that story, but it didn't quite fit, so it gets its own
-            little stage.
+            There's a visual story about these efforts (and its issues) over
+            here, and originally this thingy here was supposed to be part of
+            that story, but it didn't quite fit, so it gets its own stage.
           </p>
           <p>
             Be that as it may, the wine quality model we built over there is a
@@ -132,9 +131,9 @@
         </div>
         <div id="main">
           <p id="section-1">
-            Correlation matrices aren't very complex and support a quick and
+            Correlation matrices aren't very complex and provide a quick and
             efficient read. All your variables are in the rows
-            <strong>AND</strong> in the columns and the circles encode the
+            <strong>AND</strong> in the columns. The circles encode the
             correlation strength with size and lightness as well as the
             correlation direction with the circle's hue.
             <span class="orange">Orange</span> for negative and
@@ -160,9 +159,9 @@
           </p>
           <p id="section-4">
             As nice and efficient as this all is, it carries some slack, we can
-            prune away; like for example the diagonal of auto-correlations. It
-            is sort of pretty obvious that each variable is perfectly positively
-            correlated with itself. So let's chop it off..
+            prune away; like for example the diagonal of auto-correlations. It's
+            obvious that each variable is perfectly positively correlated with
+            itself. So let's chop it off..
           </p>
           <p id="section-empty">
             There are
@@ -182,8 +181,9 @@
               >packages</a
             >
             out there, some of which use this space to show for example the
-            density distribution of that variable, but to keep it minimal we're
-            just removing it here.
+            density distribution of that variable<span class="image"
+              ><img src="static/img/corr.jpg" /></span
+            >but to keep it minimal we're just removing it here.
           </p>
           <p id="section-5">
             But there's more to cut. In fact, more than half of the matrix can
@@ -198,17 +198,23 @@
             ...but that's a matter of taste. <br /><br />Now, the reason I
             started climbing down the correlation matrix basement to start with,
             was a faint call from the 3rd dimension. Whenever I look at
-            correlation matrices, my inner eye doesn't only see circles encoding
-            correlation strength and direction but bars, or cylinders pointing
-            up or down. We can't see them as we're looking straight down onto
-            its flat surface, but I thought they might be worth to be excavated.
-            <br /><br />It turns out the 3rd dimension isn't all too helpful
-            when you have a full matrix &mdash; as you can't see the tree for
-            the forest, as it were. Too busy. <br /><br />BUT our particular
-            interest in the data (full story over here, I won't mention it
-            again, thank you very much) is on correlation of all variables with
-            just a single variable: the wine quality! <br /><br />So, focussing
-            in on quality...
+            correlation matrices, my inner eye doesn't only see circles
+            <span class="small-image"
+              ><img class="small" src="static/img/circle.jpg"
+            /></span>
+            encoding correlation strength and direction but bars, or cylinders
+            <span class="small-image"
+              ><img class="full" src="static/img/cylinder.jpg"
+            /></span>
+            pointing up or down. We can't see them as we're looking straight
+            down onto its flat surface, but I thought they might be worth to be
+            excavated. <br /><br />It turns out the 3rd dimension isn't all too
+            helpful when you have a full matrix &mdash; as you can't see the
+            tree for the forest. Too busy. <br /><br />BUT our particular
+            interest in the data (full story over here, in case you care) is in
+            correlation of all independent variables with just a single output
+            variable: the wine quality! <br /><br />So, focussing in on
+            quality...
           </p>
           <p id="section-8">
             we can now add a length encoding to the circles' hue and lightness,

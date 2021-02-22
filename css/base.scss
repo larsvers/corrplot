@@ -37,3 +37,27 @@ canvas {
   position: fixed;
   top: 0;
 }
+
+$link: #1782e6;
+a {
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  color: $link;
+  &::after {
+    content: '';
+    background: rgba($link, 0.25);
+    position: absolute;
+    left: 2px;
+    bottom: -1px;
+    width: 100%;
+    height: 30%;
+    transition: 0.35s cubic-bezier(0.25, 0.1, 0, 2.05);
+  }
+  &:hover:after {
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 100%;
+  }
+}
