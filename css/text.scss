@@ -1,6 +1,7 @@
 // Text
 p {
   line-height: 1.4;
+  font-size: 1.2em;
 }
 
 #text-container {
@@ -39,10 +40,10 @@ p {
 
   h3 {
     color: #666;
-    font-size: 3vw;
+    font-size: 1.3em;
 
     @media #{$tablet-up} {
-      font-size: 2vw;
+      font-size: 1.4em;
     }
   }
 }

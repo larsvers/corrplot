@@ -57,7 +57,8 @@ a {
     height: 100%; }
 
 p {
-  line-height: 1.4; }
+  line-height: 1.4;
+  font-size: 1.2em; }
 
 #text-container {
   position: absolute;
@@ -82,10 +83,10 @@ p {
         font-size: 6vw; } }
   #header h3 {
     color: #666;
-    font-size: 3vw; }
+    font-size: 1.3em; }
     @media (min-width: 800px) {
       #header h3 {
-        font-size: 2vw; } }
+        font-size: 1.4em; } }
 
 #intro p {
   width: 80vw;
