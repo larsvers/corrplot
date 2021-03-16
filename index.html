@@ -91,46 +91,41 @@
         </div>
         <div id="intro">
           <p>
-            Data has a tendency to come in rows for observations and columns for
-            variables. Whenever you meet a new dataset, it seems a good idea to
-            stroll along its columns in order to establish a data profile
-            &mdash; running frequencies, calculating normal values and checking
-            for missings.
+            Structured data tends to come in rows for observations and columns
+            for variables. Whenever you run into a new dataset, it seems a good
+            idea to stroll along its columns in order to establish a data
+            profile &mdash; running frequencies, calculating normal values and
+            checking for missings.
           </p>
           <p>
-            While this first meeting is more of a personal conversation with
-            each column the second meeting tends to get more social:
-            understanding relations between variables. With numerical data you
-            would often bring a correlation matrix along, which can give you an
-            overview of associations across all variables in a dataset.
+            While this first meet is more of a personal chat with each column
+            the second one typically gets more social in that you might want to
+            understand relations between variables. A correlation matrix offers
+            a good overview of associationss between at least all the numerical
+            variables in the set.
           </p>
-          <p>
-            Recently, I've done so analysing 1,600 wines and their
-            physiochemical properties &mdash; alcohol, sugars, acids, etc.
-            &mdash; in order to build a simple model aimed to predict a wine's
-            quality.
-          </p>
-          <p id="section-0">
-            There's a visual story about these efforts (and its issues) over
-            here, and originally this thingy here was supposed to be part of
-            that story, but it didn't quite fit, so it gets its own stage.
-          </p>
-          <p>
-            Be that as it may, the wine quality model we built over there is a
-            <a
-              href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3936971"
-              target="_blank"
-              >Logistic Regression</a
-            >
-            &mdash; a general linear model, which comes with the benefit of
-            being relatively simple to explain because what it does in essence
-            is modelling correlations between our numeric variables. Typically
-            you'd get an inital overviewin a correlation matrix that might look
-            something like this:
-          </p>
+          <p>They look like this:</p>
         </div>
         <div id="main">
           <p id="section-1">
+            The matrix is based on the
+            <a
+              href="https://archive.ics.uci.edu/ml/datasets/wine+quality"
+              target="_blank"
+              rel="noreferrer"
+              >wine quality dataset</a
+            >, showing physiochemical properties (acid, sugar, alcohol etc.) of
+            1,600 wines as well as their quality as tasted and rated by wine
+            experts (full story
+            <a
+              href="https://pudding.cool/2021/03/wine-model/"
+              target="_blank"
+              rel="noreferrer"
+              >over here</a
+            >).
+            <br />
+          </p>
+          <p id="section-empty">
             Correlation matrices aren't very complex and provide a quick and
             efficient read. All your variables are in the rows
             <strong>AND</strong> in the columns. The circles encode the
@@ -168,16 +163,19 @@
             <a
               href="https://www.r-graph-gallery.com/199-correlation-matrix-with-ggally.html"
               target="_blank"
+              rel="noreferrer"
               >great</a
             >
             <a
               href="https://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html"
               target="_blank"
+              rel="noreferrer"
               >visualisation</a
             >
             <a
               href="https://seaborn.pydata.org/examples/many_pairwise_correlations.html"
               target="_blank"
+              rel="noreferrer"
               >packages</a
             >
             out there, some of which use this space to show for example the
@@ -211,21 +209,20 @@
             excavated. <br /><br />It turns out the 3rd dimension isn't all too
             helpful when you have a full matrix &mdash; as you can't see the
             tree for the forest. Too busy. <br /><br />BUT our particular
-            interest in the data (full story over here, in case you care) is in
-            correlation of all independent variables with just a single output
-            variable: the wine quality! <br /><br />So, focussing in on
-            quality...
+            interest in the data is in correlation of all independent variables
+            with just a single output variable: the wine quality!
+            <br /><br />So, focussing in on quality...
           </p>
           <p id="section-8">
             we can now add a length encoding to the circles' hue and lightness,
-            by turnining the circles into cylinders...
+            by turnining the circles into cylinders
           </p>
           <p id="section-empty">
             Nice! Redundant encodings are good for efficiency they tought us in
             visual data school, and here we have some possibly beneficial
             redundancy. <br /><br />Now it's your turn to take this for a spin.
             Just continue to scroll and wait for the big white button to
-            interact with that matrix in 3 dimensions....
+            interact with that matrix in 2 or 3 dimensions...
           </p>
         </div>
         <div id="play">

@@ -1,4 +1,8 @@
 // Text
+p {
+  line-height: 1.4;
+}
+
 #text-container {
   position: absolute;
   top: 0;
@@ -59,7 +63,7 @@
     margin: 100vh 5vw;
     padding: 2rem 4rem;
     backdrop-filter: blur(8px);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.925);
     box-shadow: 2px 2px 10px #ccc;
 
     @media #{$tablet-up} {
@@ -121,7 +125,12 @@ span.image {
   position: relative;
 
   img {
-    width: 100%;
+    width: 80%;
+    margin: 1rem 0;
+
+    @media #{$tablet-up} {
+      width: 50%;
+    }
   }
 }
 

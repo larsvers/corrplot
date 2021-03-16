@@ -71376,7 +71376,9 @@ vec4 envMapTexelToLinear(vec4 color) {
     // Just load the data and call the main func.
     csv$1('../../data/corr.csv', autoType).then(ready);
     window.addEventListener('load', function () {
-      select('#loader').transition().style('opacity', 0).remove();
+      setTimeout(function () {
+        select('#loader').transition().duration(800).style('opacity', 0).remove();
+      }, 500);
     });
   }
 

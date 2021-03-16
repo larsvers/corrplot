@@ -90,7 +90,9 @@ function init() {
   // Just load the data and call the main func.
   csv('../../data/corr.csv', autoType).then(ready);
   window.addEventListener('load', () => {
-    select('#loader').transition().style('opacity', 0).remove();
+    setTimeout(() => {
+      select('#loader').transition().duration(800).style('opacity', 0).remove();
+    }, 500);
   });
 }
 
